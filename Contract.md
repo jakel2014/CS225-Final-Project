@@ -18,4 +18,4 @@ If a team member is not performing to the expectations of the rest of the group,
 
 Conflict Resolution All conflicts within the team will be decided by a Super Smash Bros match, Final Destination, 3 stock no items. The winner will decide who was right and who was wrong (Might makes right). Or majority vote.
 Signatures
-Satvik Yellanki (satviky) 
+Satvik Yellanki (satviky) Eli Konopinski (elimk2)
