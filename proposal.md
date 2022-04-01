@@ -68,7 +68,7 @@ Algorithm # 1: Shortest Path (Dijkstra’s Algorithm)
   edges set.
 - Function Outputs: A queue that has the chain of all the airports visited.
 - Function Efficiency: The general time efficiency of this function should be
-  O(Elog(V)) where E is the total number of edges of the graph and V is the
+  O((E+V)*log(V)) where E is the total number of edges of the graph and V is the
   number of airports which create each node. Two variables are required for this
   efficiency since there is no mathematical correlation between E and V.
 
