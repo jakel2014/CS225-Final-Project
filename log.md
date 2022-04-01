@@ -1,3 +1,4 @@
 ## 3/13 MEETING NOTES
 We had an in-depth discussion about our former proposal, taking careful note of instructions from Adit. We decided that our current plan was not feasible for us to complete under the requirements of the project, so we decided to make a new proposal and project idea.
 We decided to change our dataset to the OpenFlights data set, and take some of the suggested algoithms to make ourselves. We found the map to be very intriguing. For this week, the majority of our time was spent reformulating our project proposal and making sure we had a complete understanding of the task that we have created for ourselves. 
+Next week, we hope to maintain close to our original project plan and have data acquisition completed. If everything goes according to plan, we should still be on track for the mid-project check in!
