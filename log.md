@@ -1,4 +1,7 @@
-## 3/13 MEETING NOTES
+## 3/31 MEETING NOTES
 We had an in-depth discussion about our former proposal, taking careful note of instructions from Adit. We decided that our current plan was not feasible for us to complete under the requirements of the project, so we decided to make a new proposal and project idea.
 We decided to change our dataset to the OpenFlights data set, and take some of the suggested algoithms to make ourselves. We found the map to be very intriguing. For this week, the majority of our time was spent reformulating our project proposal and making sure we had a complete understanding of the task that we have created for ourselves. 
 Next week, we hope to maintain close to our original project plan and have data acquisition completed. If everything goes according to plan, we should still be on track for the mid-project check in!
+
+## 4/6 MEETING NOTES
+During the 3/31 meeting, we decided we wanted to meet twice this week. For our first meeting this week, we started laying the foundation for our code. Lucian began working on preprocessing for our dataset, while Satvik, Eli, and Jake began creating pseudocode for Dijkstra's algotithm, our DFS, and miscellaneous helper functions. Satvik did considerable work on his own working out the Dijkstra's algorithm: https://docs.google.com/document/d/1F-bTSmK1FuKoeYkar5mkL3HNOel7NOVkksZlTMJL81s/edit?usp=sharing . We also began discussing our implementation of our test cases and our makefile. Lastly, we created pseudocode for a helper function that calculates distance between two airports using haversine formula. 
