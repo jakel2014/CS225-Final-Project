@@ -38,5 +38,7 @@ public:
 
     std::queue<ID> getAdjacentAirports(ID id);
     std::queue<ID> getAdjacentAirports(Airport port);
+
+    std::queue<ID> DFS(Airport port);
 };
 
