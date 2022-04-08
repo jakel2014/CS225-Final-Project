@@ -42,7 +42,6 @@ std::vector<Route> WeightedGraph::allPaths(ID startID, ID endID) {
     clearMarks();
 
     std::vector<Route> paths;
-    std::queue<ID> ports;
     std::priority_queue<Route, std::vector<Route>, std::greater< std::vector<Route>::value_type> > pq;
 
     Route curr(startID, startID, 0.0);
@@ -62,7 +61,7 @@ std::vector<Route> WeightedGraph::allPaths(ID startID, ID endID) {
             curr.setStart(end);
 
             double min = curr.getDist();
-            ports = getAdjacentAirports(curr.getStart());
+            std::queue<ID> ports = getAdjacentAirports(curr.getStart());
             while(!ports.empty()) {
                 ID adjacent = ports.front();
 
@@ -98,7 +97,7 @@ std::stack<Route> WeightedGraph::getShortestPath(ID startID, ID endID) {
 
     return shortestPath;
 }
-std::stack<Route> WeightedGraph::getShortestPAth(Airport start, Airport end) {
+std::stack<Route> WeightedGraph::getShortestPath(Airport start, Airport end) {
     return getShortestPath(start.getID(), end.getID());
 }
 
