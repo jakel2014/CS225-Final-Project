@@ -40,6 +40,6 @@ public:
     std::queue<ID> getAdjacentAirports(Airport port);
 
     std::queue<ID> DFS(Airport port);
-    std::queue<ID> DFS_helper(Airport port, std::vector<bool> visited_vect);
-};
+    std::queue<ID> DFS_helper(ID id, std::queue<ID> dfs_traversal);
+}
 
