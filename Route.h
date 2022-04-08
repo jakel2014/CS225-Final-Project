@@ -29,10 +29,10 @@ public:
 
     void setEnd(ID id) {endID = id;}
 
-    bool operator<(Route r) {return distance < r.distance;}
+    bool operator<(Route r) const {return distance < r.distance;}
 
-    bool operator>(Route r) {return distance > r.distance;}
+    bool operator>(Route r) const {return distance > r.distance;}
 
-    bool operator==(Route r) {return distance == r.distance;}
+    bool operator==(Route r) const {return distance == r.distance;}
 
 };

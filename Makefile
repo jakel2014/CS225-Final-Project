@@ -4,10 +4,10 @@ TEST = test
 
 # Add all object files needed for compiling:
 EXE_OBJ = main.o
-OBJS = main.o #WeightedGraph.o #dsets.o maze.o
+OBJS = Airport.o Route.o WeightedGraph.o main.o #dsets.o maze.o
 
 # Generated files
-CLEAN_RM = unsolved.png solved.png testdsets testsquaremaze \
+CLEAN_RM = unsolved.png solved.png testdijkstra testdfs testvisual \
 						*.o *.d tests/*.o tests/*.d cs225/*.d cs225/*.o \
 						cs225/lodepng/*.o cs225/lodepng/*.d \
 						cs225/catch/*.o cs225/catch/*.d
@@ -16,15 +16,23 @@ CLEAN_RM = unsolved.png solved.png testdsets testsquaremaze \
 include cs225/make/cs225.mk
 
 
-# MP-specific targets
-DSETS_OBJS = testdsets.o
-DSETS_OBJS += dsets.o
+# Part-specific targets
+DIJKSTRA_OBJS = $(filter-out $(EXE_OBJ), $(OBJS))
+DIJKSTRA_OBJS += testdijkstra.o
 
-testdsets: $(DSETS_OBJS)
+testdijkstra: $(DIJKSTRA_OBJS)
 	$(LD) $^ $(LDFLAGS) -o $@
 
-MAZE_OBJS = $(filter-out $(EXE_OBJ), $(OBJS))
-MAZE_OBJS += testsquaremaze.o
 
-testsquaremaze: $(MAZE_OBJS)
+DFS_OBJS = $(filter-out $(EXE_OBJ), $(OBJS))
+DFS_OBJS += testdfs.o
+
+testdfs: $(DFS_OBJS)
+	$(LD) $^ $(LDFLAGS) -o $@
+
+
+VISUAL_OBJS = $(filter-out $(EXE_OBJ), $(OBJS))
+VISUAL_OBJS += StickerSheet.o testvisual.o 
+
+testvisual: $(VISUAL_OBJS)
 	$(LD) $^ $(LDFLAGS) -o $@

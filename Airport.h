@@ -8,7 +8,7 @@ private:
     double latitude, longitude;
 
 public:
-    Airport(unsigned int Iid, double latitude, double longitude)
+    Airport(unsigned int id, double latitude, double longitude)
         : id(id), latitude(latitude), longitude(longitude) {}
 
     Airport() : id(0), latitude(0.0), longitude(0.0) {}
@@ -19,4 +19,3 @@ public:
 
     double getLat() {return latitude;}
 };
-
