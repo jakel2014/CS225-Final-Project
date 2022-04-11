@@ -34,9 +34,12 @@ public:
     std::vector<Route> allPaths(Airport start, Airport end);
 
     std::stack<Route> getShortestPath(ID startID, ID endID);
-    std::stack<Route> getShortestPath(Airport start, Airport end);
+    std::stack<Route> getShortestPAth(Airport start, Airport end);
 
     std::queue<ID> getAdjacentAirports(ID id);
     std::queue<ID> getAdjacentAirports(Airport port);
-};
+
+    std::queue<ID> DFS(Airport port);
+    std::queue<ID> DFS_helper(ID id, std::queue<ID> dfs_traversal);
+}
 
