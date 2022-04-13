@@ -67,7 +67,7 @@ std::vector<Route> WeightedGraph::allPaths(ID startID, ID endID) {
 
                 if(!isMarked(adjacent))
                     pq.push(Route(end, adjacent, routes[end][adjacent]+min));
-                pq.pop();
+                ports.pop();
             }
 
         }
