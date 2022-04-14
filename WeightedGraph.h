@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "Route.h"
+#include "Airport.h"
 #include <vector>
 #include <queue>
 #include <stack>
@@ -11,6 +12,7 @@
 class WeightedGraph {
 private:
     std::vector<ID> ports;
+    std::map<ID, Airport> ports_map;
     std::map<ID, std::map<ID,double> > routes;
     std::map<ID, bool> marked;
 
