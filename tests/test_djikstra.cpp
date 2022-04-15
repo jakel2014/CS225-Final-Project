@@ -1,8 +1,6 @@
 #include "../cs225/catch/catch.hpp"
 #include "../WeightedGraph.h"
 
-using namespace cs225;
-
 TEST_CASE("Graph A, 1 to 3", "[weight=1][part=1]") {
     WeightedGraph w;
     for (int i=1; i<6; i++)
