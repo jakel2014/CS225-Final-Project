@@ -24,7 +24,7 @@ void WeightedGraph::addAirport(ID id) {
     ports.push_back(id);
 }
 void WeightedGraph::addAirport(Airport port) {
-    ports_map[port.getId()] = port;
+    ports_map[port.getID()] = port;
     addAirport(port.getID());
 }
 

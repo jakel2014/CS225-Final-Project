@@ -1,6 +1,6 @@
 #include "WeightedGraph.h"
 #include "Airport.h"
-#include <lazycsv.hpp>
+#include "lazycsv.hpp"
 
 
 
@@ -12,7 +12,7 @@ int main() {
 
     WeightedGraph new_graph;
 
-    lazycsv::parser parser("tests/airports.csv");
+    lazycsv::parser parser("data/airports.csv");
 
     for(const auto row: parser){
         const auto [id, name, lattitude, longitude] = row.cells(0, 1, 6, 7);
