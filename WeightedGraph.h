@@ -32,7 +32,11 @@ public:
     void addRoute(Airport start, Airport end);
     void addRoute(Route route);
 
-    std::vector<Route> allPaths(ID startID, ID endID);
+/*
+This function uses djikstras algorithm to get all the paths from the start
+airport to the end airport.  
+*/
+    std::vector<Route> allPaths(ID startID, ID endID); 
     std::vector<Route> allPaths(Airport start, Airport end);
 
     std::stack<Route> getShortestPath(ID startID, ID endID);

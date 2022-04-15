@@ -15,7 +15,7 @@ bool WeightedGraph::isMarked(Airport port) {
 }
 
 void WeightedGraph::clearMarks() {
-    for (std::pair<ID, bool> mark : marked)
+    for (auto & mark : marked)
         mark.second = false;
 }
 
