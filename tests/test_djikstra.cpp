@@ -1,4 +1,4 @@
-#include "../cs225"
+#include "../cs225/catch/catch.hpp"
 #include "../WeightedGraph.h"
 
 using namespace cs225;
