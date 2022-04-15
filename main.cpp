@@ -14,19 +14,22 @@ int main() {
 
     //This stuff is for Airports
     //Stuff goes here
+    /*rapidcsv::Document doc1("data/airports-preprocessed.csv");
 
+    
+    */
 
     //Loop setting up airports
 
     //This stuff should be for Routes
-    rapidcsv::Document doc("data/routesout.csv");
-    std::vector<double> srclatitudes = doc.GetColumn<double>("src airport lat");
-    std::vector<double> srclongitudes = doc.GetColumn<double>("src airport long");
-    std::vector<double> dstlatitudes = doc.GetColumn<double>("dst airport lat");
-    std::vector<double> dstlongitudes = doc.GetColumn<double>("dst airport long");
+    rapidcsv::Document doc2("data/routes-preprocessed.csv");
+    std::vector<double> srclatitudes = doc2.GetColumn<double>("src airport lat");
+    std::vector<double> srclongitudes = doc2.GetColumn<double>("src airport long");
+    std::vector<double> dstlatitudes = doc2.GetColumn<double>("dst airport lat");
+    std::vector<double> dstlongitudes = doc2.GetColumn<double>("dst airport long");
     
-    std::vector<int> srcID = doc.GetColumn<int>("src airport ID");
-    std::vector<int> dstID = doc.GetColumn<int>("dst airport ID");
+    std::vector<int> srcID = doc2.GetColumn<int>("src airport ID");
+    std::vector<int> dstID = doc2.GetColumn<int>("dst airport ID");
 
     //Loop here setting up the routes
     for(int i = 0; i < srclatitudes.size() - 1; i++){   //all the vectors should be the same size, so
