@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # usage: import-routes <airports CSV> <routes CSV>
 
-OUTPUT_FILE = 'routes-preprocessed.csv'
+OUTPUT_FILE = 'data/routes-preprocessed.csv'
 
 import csv
 import sys
