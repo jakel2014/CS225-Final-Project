@@ -2,6 +2,7 @@
 
 #include "Airport.h"
 #include "Extra.h"
+#include "Extra.cpp"
 #include <cstdlib>
 #include <math.h>
 #include <iostream>
