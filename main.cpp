@@ -12,15 +12,11 @@ int main() {
 
     WeightedGraph new_graph;
 
-    lazycsv::parser parser("data/airports.csv");
-
-    for(const auto row: parser){
-        const auto [id, name, lattitude, longitude] = row.cells(0, 1, 6, 7);
-        Airport cur_airport(id.trimed(), lattitude.trimed(), longitude.trimed(), name.trimed());
-        new_graph.addAirport(cur_airport); 
-    }
-
-    //need to add routes
+    //This should be for Airports
+    rapidcsv::Document doc("data/routes.csv", rapidcsv::LabelParams(-1, -1));
+    std::vector<double> latitudes = doc.GetColumn<double>(1);
+    std::vector<double> longitudes = doc.GetColumn<double>(2);
+    
 
     return 0;
 }
