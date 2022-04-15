@@ -19,7 +19,7 @@ int main() {
     //Loop setting up airports
 
     //This stuff should be for Routes
-    rapidcsv::Document doc("data/out.csv");
+    rapidcsv::Document doc("data/routesout.csv");
     std::vector<double> srclatitudes = doc.GetColumn<double>("src airport lat");
     std::vector<double> srclongitudes = doc.GetColumn<double>("src airport long");
     std::vector<double> dstlatitudes = doc.GetColumn<double>("dst airport lat");
@@ -29,9 +29,10 @@ int main() {
     std::vector<int> dstID = doc.GetColumn<int>("dst airport ID");
 
     //Loop here setting up the routes
-
-
-
+    for(int i = 0; i < srclatitudes.size() - 1; i++){   //all the vectors should be the same size, so
+        double tempdistance = calcDistance(srclatitudes[i], srclongitudes[i], dstlatitudes[i], dstlongitudes[i]);
+        new_graph.addRoute(srcID[i], dstID[i], tempdistance);
+    }
 
     return 0;
 }
