@@ -140,4 +140,6 @@ std::queue<ID> WeightedGraph::DFS_helper(ID id, std::queue<ID> dfs_traversal){
              DFS_helper(i, dfs_traversal);
          }
      }
+
+     return dfs_traversal;
 }
