@@ -32,7 +32,7 @@ int main() {
     std::vector<int> dstID = doc2.GetColumn<int>("dst airport ID");
 
     //Loop here setting up the routes
-    for(int i = 0; i < srclatitudes.size() - 1; i++){   //all the vectors should be the same size, so
+    for(unsigned i = 0; i < srclatitudes.size() - 1; i++){   //all the vectors should be the same size, so
         double tempdistance = calcDistance(srclatitudes[i], srclongitudes[i], dstlatitudes[i], dstlongitudes[i]);
         new_graph.addRoute(srcID[i], dstID[i], tempdistance);
     }
