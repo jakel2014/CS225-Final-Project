@@ -33,7 +33,16 @@ void load_graph_b(WeightedGraph & w) { //basic graph with double connections
     w.addRoute(5,4,3);
 }
 
-void load_graph_c(WeightedGraph & w) {
+void load_graph_d(WeightedGraph & w) { //small graph with decimals
+    for (int i=1; i<4; i++)
+        w.addAirport(i);
+   
+    w.addRoute(1,3,3.1415926535);
+    w.addRoute(3,2,2.7182818284);
+    w.addRoute(1,2,420.69);
+}
+
+void load_graph_c(WeightedGraph & w) { //weird graph from google images
     for (int i=0; i<9; i++)
         w.addAirport(i);
 
@@ -66,7 +75,11 @@ void load_graph_c(WeightedGraph & w) {
     w.addRoute(8,2,2);
 }
 
-TEST_CASE("Graph A, 1 to 3", "[weight=1][part=1]") {
+////////////////////////////////////////////////////////////////
+//////////////////////// Start of Tests ////////////////////////
+////////////////////////////////////////////////////////////////
+
+TEST_CASE("Graph A 1 to 3", "[weight=1][part=1]") {
     WeightedGraph w;
     load_graph_a(w);
     
@@ -86,7 +99,7 @@ TEST_CASE("Graph A, 1 to 3", "[weight=1][part=1]") {
     REQUIRE( path.empty() == true );
 }
 
-TEST_CASE("Graph A, 5 to 1", "[weight=1][part=1]") {
+TEST_CASE("Graph A 5 to 1", "[weight=1][part=1]") {
     WeightedGraph w;
     load_graph_a(w);
 
@@ -96,7 +109,7 @@ TEST_CASE("Graph A, 5 to 1", "[weight=1][part=1]") {
     REQUIRE(path.empty() == true);
 }
 
-TEST_CASE("Graph A, 1 to 5", "[weight=1][part=1]") {
+TEST_CASE("Graph A 1 to 5", "[weight=1][part=1]") {
     WeightedGraph w;
     load_graph_a(w);
     
@@ -124,7 +137,7 @@ TEST_CASE("Graph A, 1 to 5", "[weight=1][part=1]") {
     REQUIRE( path.empty() == true );
 }
 
-/*TEST_CASE("Graph A, 1 to 3,5", "[weight=1][part=1]") {
+TEST_CASE("Graph A 1 to 3/5", "[weight=1][part=1]") {
     WeightedGraph w;
     load_graph_a(w);
     
@@ -135,12 +148,12 @@ TEST_CASE("Graph A, 1 to 5", "[weight=1][part=1]") {
     REQUIRE(path13.size() == 2);
 
     REQUIRE(path13.top().getStart() == 1);
-    REQUIRE(path13.top().getStart() == 2);
+    REQUIRE(path13.top().getEnd() == 2);
     path13.pop();
 
     REQUIRE(path13.top().getStart() == 2);
-    REQUIRE(path13.top().getStart() == 3);
-    REQUIRE(path.top().getDist() == 8.0);
+    REQUIRE(path13.top().getEnd() == 3);
+    REQUIRE(path13.top().getDist() == 3.0);
     path13.pop();
 
     REQUIRE( path13.empty() == true );
@@ -149,26 +162,26 @@ TEST_CASE("Graph A, 1 to 5", "[weight=1][part=1]") {
     REQUIRE(path15.size() == 4);
 
     REQUIRE(path15.top().getStart() == 1);
-    REQUIRE(path15.top().getStart() == 2);
+    REQUIRE(path15.top().getEnd() == 2);
     path15.pop();
 
     REQUIRE(path15.top().getStart() == 2);
-    REQUIRE(path15.top().getStart() == 3);
+    REQUIRE(path15.top().getEnd() == 3);
     path15.pop();
 
     REQUIRE(path15.top().getStart() == 3);
-    REQUIRE(path15.top().getStart() == 4);
+    REQUIRE(path15.top().getEnd() == 4);
     path15.pop();
 
     REQUIRE(path15.top().getStart() == 4);
-    REQUIRE(path15.top().getStart() == 5);
-    REQUIRE(path.top().getDist() == 8.0);
+    REQUIRE(path15.top().getEnd() == 5);
+    REQUIRE(path15.top().getDist() == 8.0);
     path15.pop();
 
     REQUIRE( path15.empty() == true );
-}*/
+}
 
-TEST_CASE("Graph B, 1 to 5", "[weight=1][part=1]") {
+TEST_CASE("Graph B 1 to 5", "[weight=1][part=1]") {
     WeightedGraph w;
     load_graph_b(w);
     
@@ -196,7 +209,7 @@ TEST_CASE("Graph B, 1 to 5", "[weight=1][part=1]") {
     REQUIRE( path.empty() == true );
 }
 
-TEST_CASE("Graph B, 5 to 1", "[weight=1][part=1]") {
+TEST_CASE("Graph B 5 to 1", "[weight=1][part=1]") {
     WeightedGraph w;
     load_graph_b(w);
     
@@ -225,7 +238,7 @@ TEST_CASE("Graph B, 5 to 1", "[weight=1][part=1]") {
 }
 
 
-TEST_CASE("Graph C, 0 to 8", "[weight=1][part=1]") {
+TEST_CASE("Graph C 0 to 8", "[weight=1][part=1]") {
     WeightedGraph w;
     load_graph_c(w);
 
@@ -257,7 +270,7 @@ TEST_CASE("Graph C, 0 to 8", "[weight=1][part=1]") {
     REQUIRE( path.empty() == true );
 }
 
-TEST_CASE("Graph C, 5 to 3", "[weight=1][part=1]") {
+TEST_CASE("Graph C 5 to 3", "[weight=1][part=1]") {
     WeightedGraph w;
     load_graph_c(w);
 
@@ -273,7 +286,7 @@ TEST_CASE("Graph C, 5 to 3", "[weight=1][part=1]") {
     REQUIRE( path.empty() == true );
 }
 
-TEST_CASE("Graph C, 3 to 5", "[weight=1][part=1]") {
+TEST_CASE("Graph C 3 to 5", "[weight=1][part=1]") {
     WeightedGraph w;
     load_graph_c(w);
 
@@ -293,3 +306,22 @@ TEST_CASE("Graph C, 3 to 5", "[weight=1][part=1]") {
     REQUIRE( path.empty() == true );
 }
 
+TEST_CASE("Graph D 1 to 2", "[weight=1][part=1]") {
+    WeightedGraph w;
+    load_graph_d(w);
+
+    std::stack<Route> path = w.getShortestPath(1,2);
+
+    REQUIRE(path.size() == 2);
+
+    REQUIRE(path.top().getStart() == 1);
+    REQUIRE(path.top().getEnd() == 3);
+    path.pop();
+
+    REQUIRE(path.top().getStart() == 3);
+    REQUIRE(path.top().getEnd() == 2);
+    REQUIRE(path.top().getDist() == (2.7182818284+3.1415926535));
+    path.pop();
+
+    REQUIRE( path.empty() == true );
+}   
