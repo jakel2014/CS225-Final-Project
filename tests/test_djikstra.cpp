@@ -1,8 +1,8 @@
 #include "../cs225/catch/catch.hpp"
 #include "../WeightedGraph.h"
 
-TEST_CASE("Graph A, 1 to 3", "[weight=1][part=1]") {
-    WeightedGraph w;
+
+void load_graph_a(WeightedGraph & w) {
     for (int i=1; i<6; i++)
         w.addAirport(i);
    
@@ -12,6 +12,11 @@ TEST_CASE("Graph A, 1 to 3", "[weight=1][part=1]") {
     w.addRoute(2,4,7);
     w.addRoute(3,4,2);
     w.addRoute(4,5,3);
+}
+
+TEST_CASE("Graph A, 1 to 3", "[weight=1][part=1]") {
+    WeightedGraph w;
+    load_graph_a(w);
     
     std::stack<Route> path = w.getShortestPath(1,3);
 
@@ -30,15 +35,7 @@ TEST_CASE("Graph A, 1 to 3", "[weight=1][part=1]") {
 
 TEST_CASE("Graph A, 1 to 5", "[weight=1][part=1]") {
     WeightedGraph w;
-    for (int i=1; i<6; i++)
-        w.addAirport(i);
-   
-    w.addRoute(1,2,1);
-    w.addRoute(1,3,5);
-    w.addRoute(2,3,2);
-    w.addRoute(2,4,7);
-    w.addRoute(3,4,2);
-    w.addRoute(4,5,3);
+    load_graph_a(w);
     
     std::stack<Route> path = w.getShortestPath(1,5);
 
@@ -63,17 +60,9 @@ TEST_CASE("Graph A, 1 to 5", "[weight=1][part=1]") {
     REQUIRE( path.empty() == true );
 }
 
-/*TEST_CASE("Graph A, 1 to 3,5", "[weight=1][part=1]") {
+TEST_CASE("Graph A, 1 to 3,5", "[weight=1][part=1]") {
     WeightedGraph w;
-    for (int i=1; i<6; i++)
-        w.addAirport(i);
-   
-    w.addRoute(1,2,1);
-    w.addRoute(1,3,5);
-    w.addRoute(2,3,2);
-    w.addRoute(2,4,7);
-    w.addRoute(3,4,2);
-    w.addRoute(4,5,3);
+    load_graph_a(w);
     
     std::stack<Route> path13 = w.getShortestPath(1,3);
     std::stack<Route> path15 = w.getShortestPath(1,5);
@@ -111,4 +100,6 @@ TEST_CASE("Graph A, 1 to 5", "[weight=1][part=1]") {
     path15.pop();
 
     REQUIRE( path15.empty() == true );
-}*/
+}
+
+
