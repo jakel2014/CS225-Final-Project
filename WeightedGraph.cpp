@@ -119,27 +119,28 @@ std::queue<ID> WeightedGraph::DFS(Airport port){
 
     ID id = port.getID();
 
-    return DFS_helper(id, dfs_traversal);
-}
+    std::stack<ID> s;
+    s.push(id);
+    markAirport(id);
 
-std::queue<ID> WeightedGraph::DFS_helper(ID id, std::queue<ID> dfs_traversal){
-     markAirport(id);
+    while(!(s.empty())){
+        ID cur = s.top();
+        s.pop();
+        dfs_traversal.push(cur);
+        std::queue<ID> adjacent = getAdjacentAirports(id);
 
-     dfs_traversal.push(id);
-     std::queue<ID> adjacent = getAdjacentAirports(id);
-
-     std::vector<ID> adj;
-
-     while(!(adjacent.empty())){
-        adj.push_back(adjacent.front());
-        adjacent.pop();
+        while(!(adjacent.empty())){
+            if(!isMarked(adjacent.front())){
+                ID neighbor = adjacent.front();
+                s.push(neighbor);
+                adjacent.pop();
+                markAirport(neighbor);
+            }
+        }
      }
 
-     for(ID & i : adj){
-         if(!(isMarked(i))){
-             DFS_helper(i, dfs_traversal);
-         }
-     }
 
      return dfs_traversal;
 }
+
+
