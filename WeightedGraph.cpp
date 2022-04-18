@@ -133,9 +133,9 @@ std::queue<ID> WeightedGraph::DFS(Airport port){
             if(!isMarked(adjacent.front())){
                 ID neighbor = adjacent.front();
                 s.push(neighbor);
-                adjacent.pop();
                 markAirport(neighbor);
             }
+            adjacent.pop();
         }
      }
 
