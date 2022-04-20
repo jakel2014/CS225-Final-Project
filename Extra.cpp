@@ -9,7 +9,7 @@ static double calcDistance(double slatitude, double slongitude, double elatitude
         double latdistance = elatRads - slatRads;   //haversine formula needs these
         double londistance = elonRads - slonRads;
 
-        double radius = 1;   //Update to the radius of the earth in whatever units we want it to be in
+        double radius = 6378.1;   //Update to the radius of the earth in whatever units we want it to be in
 
         double ret = 2 * radius * asin(sqrt(pow(sin(latdistance/2), 2) + cos(slatRads) * cos(elatRads) * pow(sin(londistance/2), 2)));
         //The above line is haversine formula
