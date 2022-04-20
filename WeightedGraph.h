@@ -12,7 +12,7 @@
 class WeightedGraph {
 private:
     std::vector<ID> ports;
-    std::map<ID, Airport> ports_map;
+    //std::map<ID, Airport> ports_map;
     std::map<ID, std::map<ID,double> > routes;
     std::map<ID, bool> marked;
 
@@ -45,6 +45,6 @@ airport to the end airport.
     std::queue<ID> getAdjacentAirports(ID id);
     std::queue<ID> getAdjacentAirports(Airport port);
 
-    std::queue<ID> DFS(Airport port);
+    std::queue<ID> DFS(ID id);
 };
 

@@ -24,7 +24,7 @@ void WeightedGraph::addAirport(ID id) {
     ports.push_back(id);
 }
 void WeightedGraph::addAirport(Airport port) {
-    ports_map[port.getID()] = port;
+    //ports_map[port.getID()] = port;
     addAirport(port.getID());
 }
 
@@ -113,11 +113,9 @@ std::queue<ID> WeightedGraph::getAdjacentAirports(Airport port) {
     return getAdjacentAirports(port.getID());
 }
 
-std::queue<ID> WeightedGraph::DFS(Airport port){
-    std::queue<ID> dfs_traversal;
+std::queue<ID> WeightedGraph::DFS(ID id){
     clearMarks();
-
-    ID id = port.getID();
+    std::queue<ID> dfs_traversal;
 
     std::stack<ID> s;
     s.push(id);
@@ -127,15 +125,15 @@ std::queue<ID> WeightedGraph::DFS(Airport port){
         ID cur = s.top();
         s.pop();
         dfs_traversal.push(cur);
-        std::queue<ID> adjacent = getAdjacentAirports(id);
+        std::queue<ID> adjacent = getAdjacentAirports(cur);
 
         while(!(adjacent.empty())){
+            ID neighbor = adjacent.front();
             if(!isMarked(adjacent.front())){
-                ID neighbor = adjacent.front();
                 s.push(neighbor);
-                adjacent.pop();
                 markAirport(neighbor);
             }
+            adjacent.pop();
         }
      }
 
