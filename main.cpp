@@ -14,10 +14,10 @@ int main() {
     //Stuff goes here
     /*rapidcsv::Document doc1("data/airports-preprocessed.csv");
     std::vector<std::string> names = doc1.GetColumn<std::string>("name");
-    std::vector<std::string> IATAs = doc1.GetColumn<std::string>("iata");
-    std::vector<std::string> ICAOs = doc1.GetColumn<std::string>("icao");
+    std::vector<std::string> IATAs = doc1.GetColumn<std::string>("IATA");
+    std::vector<std::string> ICAOs = doc1.GetColumn<std::string>("ICAO");
 
-    std::vector<int> IDs = doc1.GetColumn<int>("id");
+    std::vector<int> IDs = doc1.GetColumn<int>("ID");
 
     for (int i=0; i<5; i++) {     //Test to see that rapicsv works for airports
         std::cout << IDs[i] << " " << names[i] << " " << IATAs[i] << ICAOs[i] << std::endl; 
