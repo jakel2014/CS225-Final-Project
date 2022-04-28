@@ -66,19 +66,16 @@ void load_graph_c_1(WeightedGraph & w) { //basic graph 4
    
 }
 
-void load_graph_g_1(WeightedGraph & w) { //basic graph 3
-    for (int i=0; i<7; i++)
+void load_graph_f_1(WeightedGraph & w) { //basic graph 5
+    for (int i=0; i<4; i++)
         w.addAirport(i);
    
     w.addRoute(0,1,1);
-    w.addRoute(0,2,5);
-    w.addRoute(1,2,2);
-    w.addRoute(1,3,7);
-    w.addRoute(2,3,2);
-    w.addRoute(3,4,2);
-    w.addRoute(4,0,2);
-    w.addRoute(4,1,2);
-    w.addRoute(4,5,2);
+    w.addRoute(0,2,1);
+    w.addRoute(1,2,5);
+    w.addRoute(2,0,2);
+    w.addRoute(2,3,7);
+    w.addRoute(3,3,2);
 }
 
 TEST_CASE("DFS Basic Test 1", "[weight=1][part=1]") {
