@@ -115,22 +115,22 @@ std::queue<ID> WeightedGraph::getAdjacentAirports(Airport port) {
 
 std::queue<ID> WeightedGraph::DFS(ID id){
     clearMarks();
-    std::queue<ID> dfs_traversal;
+    std::queue<ID> dfs_traversal; //queue used to store the dfs traversal
 
-    std::stack<ID> s;
+    std::stack<ID> s; //stack used in dfs
     s.push(id);
-    markAirport(id);
+    markAirport(id); //first airport is pushed into the stack and marked as visited
 
-    while(!(s.empty())){
-        ID cur = s.top();
-        s.pop();
-        dfs_traversal.push(cur);
-        std::queue<ID> adjacent = getAdjacentAirports(cur);
+    while(!(s.empty())){ //loop runs while the stack is not empty
+        ID cur = s.top(); 
+        s.pop(); //current airport is initialized and the top of stack is popped
+        dfs_traversal.push(cur); //current airport added to the dfs traversal
+        std::queue<ID> adjacent = getAdjacentAirports(cur); //get the adjacent airports to current airport
 
-        while(!(adjacent.empty())){
-            ID neighbor = adjacent.front();
-            if(!isMarked(adjacent.front())){
-                s.push(neighbor);
+        while(!(adjacent.empty())){ //go through all adjacent airports
+            ID neighbor = adjacent.front(); 
+            if(!isMarked(adjacent.front())){ 
+                s.push(neighbor); //if neighboring airport has not been visited, push it into the stack and mark it as visited.
                 markAirport(neighbor);
             }
             adjacent.pop();
