@@ -3,7 +3,9 @@
 WeightedGraph::WeightedGraph(DataParser & data) {
 
     std::vector<ID> portIDs;
-    data.getAirportsData(NULL, portIDs, NULL, NULL);
+    std::vector<std::string> names;
+    std::vector<double> pt1, pt2;
+    data.getAirportsData(names, portIDs, pt1, pt2);
     for (auto & id : portIDs)
         addAirport(id);
     
