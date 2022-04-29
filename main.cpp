@@ -36,6 +36,9 @@ int main() {
 
 int main2() {
     DataParser parser("airports-preprocessed.csv", "routes-preprocessed.csv");
+    parser.airports_helper();   //Initialize both our airports
+    parser.routes_helper();     //and our routes
+    
     WeightedGraph graph(parser);
 
     Image worldMap;
