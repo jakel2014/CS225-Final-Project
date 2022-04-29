@@ -2,6 +2,15 @@
 
 CS 225 final project, Spring 2022
 
+## To-do
+
+- [ ] Operation mode selection
+	- [ ] Dijkstra's
+		- [ ] Print chain to console
+		- [ ] Visual output
+	- [ ] DFS
+		- [ ] Print chain to console
+
 ## Third-party components
 
 - [rapidcsv: C++ CSV-parsing library](https://github.com/d99kris/rapidcsv) by Kristofer Berggren
