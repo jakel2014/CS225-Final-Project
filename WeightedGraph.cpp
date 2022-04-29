@@ -12,9 +12,13 @@ WeightedGraph::WeightedGraph(DataParser & data) {
     std::vector<double> distances;
     std::vector<ID> sourceID, destinationID; 
     data.getRoutesData(distances, sourceID, destinationID);
-    for (int i=0; i<distances.size(); i++)
+    for (unsigned i=0; i<distances.size(); i++)
         addRoute(sourceID[i], destinationID[i], distances[i]);
 
+}
+
+WeightedGraph::WeightedGraph(){
+    
 }
 
 void WeightedGraph::markAirport(ID id) {

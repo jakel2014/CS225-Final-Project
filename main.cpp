@@ -1,7 +1,7 @@
 #include "WeightedGraph.h"
 #include "Airport.h"
 #include "DataParser.h"
-#include "Visual"
+#include "Visual.h"
 
 
 int main() {

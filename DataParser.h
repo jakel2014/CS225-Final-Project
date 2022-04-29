@@ -11,11 +11,10 @@ class DataParser{
              std::vector<ID> & destinationID);  //Input empty vector, loads it with the data
         void getAirportsData(std::vector<std::string> & portNames, std::vector<ID> & portID,
              std::vector<double> & portLatitudes, std::vector<double> & portLongitudes);
-
-    private:
-
         void airports_helper();
         void routes_helper();
+
+    private:
 
         rapidcsv::Document airports;
         rapidcsv::Document routes;

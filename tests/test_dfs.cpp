@@ -1,5 +1,6 @@
 #include "../cs225/catch/catch.hpp"
 #include "../WeightedGraph.h"
+#include "../DataParser.h"
 
 
 void load_graph_a_1(WeightedGraph & w) { //basic graph 1
@@ -76,6 +77,31 @@ void load_graph_f_1(WeightedGraph & w) { //basic graph 5
     w.addRoute(2,0,2);
     w.addRoute(2,3,7);
     w.addRoute(3,3,2);
+}
+
+void load_graph_actual_1(WeightedGraph & w){
+    DataParser parser("graph_a_airports.csv", "graph_a_routes.csv");
+    parser.airports_helper();
+    parser.routes_helper();
+
+    std::vector<std::string> portNames; //Initialize all our variables for airports
+    std::vector<ID> portID;
+    std::vector<double> portLatitudes;
+    std::vector<double> portLongitudes;
+    parser.getAirportsData(portNames, portID, portLatitudes, portLongitudes);
+
+    for(unsigned i = 0; i < portID.size() - 1; i++){    //Add all airports to our graph
+        w.addAirport(portID[i]);
+    }
+
+    std::vector<double> distances;  //Initialize all our variables for routes
+    std::vector<ID> sourceID;
+    std::vector<ID> destinationID;
+    parser.getRoutesData(distances, sourceID, destinationID);
+
+    for(unsigned j = 0; j < distances.size() - 1; j++){ //Add all routes to our graph
+        w.addRoute(sourceID[j], destinationID[j], distances[j]);
+    }
 }
 
 TEST_CASE("DFS Basic Test 1", "[weight=1][part=1]") {
@@ -228,4 +254,15 @@ TEST_CASE("DFS Basic Test 5", "[weight=1][part=1]") {
     dfs_traversal.pop();
 
     REQUIRE(dfs_traversal.front() == 1);
+}
+
+TEST_CASE("DFS Actual Test 1", "[weight=1][part=1]") {
+    WeightedGraph w;
+    load_graph_actual_1(w);
+    
+    std::queue<ID> dfs_traversal = w.DFS(1);
+
+    REQUIRE(dfs_traversal.size() == 5);
+
+    
 }
