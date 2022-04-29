@@ -1,15 +1,20 @@
 #include "DataParser.h"
 
+DataParser::DataParser(std::string airports_file, std::string routes_file) {
+        airports = rapidcsv::Document(airports_file);  //Load file with rapidcsv
+        routes = rapidcsv::Document(routes_file);
+
+}
+
 void DataParser::airports_helper(){
     //This stuff is for Airports
-    rapidcsv::Document doc1("data/airports-preprocessed.csv");  //Load file with rapidcsv
-    name = doc1.GetColumn<std::string>("name");
-    iata = doc1.GetColumn<std::string>("IATA");
-    icao = doc1.GetColumn<std::string>("ICAO");
-    lat = doc1.GetColumn<double>("lat");
-    lon = doc1.GetColumn<double>("long");
+    name = airports.GetColumn<std::string>("name");
+    iata = airports.GetColumn<std::string>("IATA");
+    icao = airports.GetColumn<std::string>("ICAO");
+    lat = airports.GetColumn<double>("lat");
+    lon = airports.GetColumn<double>("long");
 
-    id = doc1.GetColumn<ID>("ID");
+    id = airports.GetColumn<ID>("ID");
 
     /*for (int i=0; i<5; i++) {     //Test to see that rapicsv works for airports
         std::cout << IDs[i] << " " << names[i] << " " << IATAs[i] << ICAOs[i] << std::endl; 
@@ -17,14 +22,13 @@ void DataParser::airports_helper(){
 }
 void DataParser::routes_helper(){
     //This stuff should be for Routes
-    rapidcsv::Document doc2("data/routes-preprocessed.csv");    //Load file with rapidcsv
-    std::vector<double> srclatitudes = doc2.GetColumn<double>("src airport lat");   //Needed for distance calcs
-    std::vector<double> srclongitudes = doc2.GetColumn<double>("src airport long");
-    std::vector<double> dstlatitudes = doc2.GetColumn<double>("dst airport lat");
-    std::vector<double> dstlongitudes = doc2.GetColumn<double>("dst airport long");
+    std::vector<double> srclatitudes = routes.GetColumn<double>("src airport lat");   //Needed for distance calcs
+    std::vector<double> srclongitudes = routes.GetColumn<double>("src airport long");
+    std::vector<double> dstlatitudes = routes.GetColumn<double>("dst airport lat");
+    std::vector<double> dstlongitudes = routes.GetColumn<double>("dst airport long");
     
-    srcID = doc2.GetColumn<ID>("src airport ID");
-    dstID = doc2.GetColumn<ID>("dst airport ID");
+    srcID = routes.GetColumn<ID>("src airport ID");
+    dstID = routes.GetColumn<ID>("dst airport ID");
 
 
     /*for (int i=0; i<5; i++) {     //Test to see that rapicsv works for routes
