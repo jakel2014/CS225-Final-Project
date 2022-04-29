@@ -19,3 +19,6 @@ During our check-in with Adit, he recommended implementing test cases for our gr
 
 ## 4/25 MEETING NOTES
 This week, we started with a meeting on monday to create a plan for our project moving forward. Lucian was set to work on finishing up data processing, while everyone else focused on preparing our code to begin working on our visual output. We plan to move our code that used rapidcsv into its own class so that we can run it independantly in our test cases. Eli was assigned to making DataParser.h, Jake continued working on DFS test cases, and Satvik began planning out our visual output as well as adding additional functionality to our weighted graph class. 
+
+## 4/28 MEETING NOTES
+We have largely finished the DataParser class. We modified the output of the preprocessing script to include latitudes and longitudes for each airport. We discussed beginning details on our graphical map output (including brainstorming our way through the map-drawing algorithms we will implement) and began work on a corresponding Visual class. We found a suitable map image and formatted it for our use. We strategized around how we will solicit user input for selection of each operation mode and began splitting up the code accordingly. We will meet *at least* twice next week as we approach the project deadline.
