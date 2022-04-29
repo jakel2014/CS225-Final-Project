@@ -1,5 +1,5 @@
 #include "StickerSheet.h"
-#include "WeightedGraph"
+#include "WeightedGraph.h"
 
 class Visual {
     private:

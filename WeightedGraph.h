@@ -27,6 +27,7 @@ private:
 
 public:
     WeightedGraph(DataParser & data);
+    WeightedGraph();
 
     void addAirport(ID id);
     void addAirport(Airport port);
