@@ -12,7 +12,7 @@ import sys
 airports = {}
 with open(OUTPUT_FILE_AIRPORTS, 'w', encoding = 'utf-8') as f_out_airports:
 	writer = csv.writer(f_out_airports)
-	writer.writerow(['ID', 'IATA', 'ICAO', 'name'])
+	writer.writerow(['ID', 'lat', 'long', 'IATA', 'ICAO', 'name'])
 	with open(sys.argv[1], encoding = 'utf-8') as f_airports_csv:
 		reader = csv.reader(f_airports_csv)
 		for row in reader:
@@ -29,7 +29,7 @@ with open(OUTPUT_FILE_AIRPORTS, 'w', encoding = 'utf-8') as f_out_airports:
 			if IATA == '' and ICAO == '':
 				# skip airports with no codes defined
 				continue
-			writer.writerow([ID, IATA, ICAO, name])
+			writer.writerow([ID, latitude, longitude, IATA, ICAO, name])
 			airports[ID] = {
 				'name': name,
 				'IATA': IATA,

@@ -11,6 +11,8 @@ void DataParser::airports_helper(){
     name = doc1.GetColumn<std::string>("name");
     iata = doc1.GetColumn<std::string>("IATA");
     icao = doc1.GetColumn<std::string>("ICAO");
+    lat = doc1.GetColumn<double>("lat");
+    long = doc1.GetColumn<double>("long");
 
     id = doc1.GetColumn<ID>("ID");
 
