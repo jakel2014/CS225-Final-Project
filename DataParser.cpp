@@ -1,10 +1,5 @@
 #include "DataParser.h"
 
-/*
-/   OK guys so the problem here is that airports-preprocessed doenst include lats and lons rn, so
-/   this wont actually work until it is included. Also, I added IATA and ICAO because its needed info
-/   I think for what our final product should do.
-*/
 void DataParser::airports_helper(){
     //This stuff is for Airports
     rapidcsv::Document doc1("data/airports-preprocessed.csv");  //Load file with rapidcsv
@@ -12,7 +7,7 @@ void DataParser::airports_helper(){
     iata = doc1.GetColumn<std::string>("IATA");
     icao = doc1.GetColumn<std::string>("ICAO");
     lat = doc1.GetColumn<double>("lat");
-    long = doc1.GetColumn<double>("long");
+    lon = doc1.GetColumn<double>("long");
 
     id = doc1.GetColumn<ID>("ID");
 
