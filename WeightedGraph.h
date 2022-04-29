@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Route.h"
 #include "Airport.h"
+#include "DataParser.h"
 #include <vector>
 #include <queue>
 #include <stack>
@@ -25,6 +26,8 @@ private:
     void clearMarks();
 
 public:
+    WeightedGraph(DataParser & data);
+
     void addAirport(ID id);
     void addAirport(Airport port);
 
