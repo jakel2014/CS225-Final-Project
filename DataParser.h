@@ -1,10 +1,11 @@
 #pragma once
 
 #include "rapidcsv.h"
-#include "WeightedGraph.h"
+#include "Extra.hpp"
+#include "Airport.h"
 
 class DataParser {
-    
+
     public:
         DataParser(std::string airports_file, std::string routes_file);
 

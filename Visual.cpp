@@ -12,9 +12,10 @@ std::vector<int> Visual::getPixelPosition(double latitude, double longitude) {
 }
 
 
-Visual::Visual(Image world_map) { //sets worldMap as base of map
+Visual::Visual(Image world_map) : map(world_map, 1) { //sets worldMap as base of map
 
-    map = StickerSheet(world_map, 1);
+    //map = StickerSheet(world_map, 1);
+    worldMap = world_map;
 }
 
     //creates the shortest line between two lat, long pts. Prefers left side

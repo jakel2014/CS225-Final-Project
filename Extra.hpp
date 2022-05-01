@@ -1,6 +1,9 @@
-#include "Extra.h"
+#pragma once
 
-static double calcDistance(double slatitude, double slongitude, double elatitude, double elongitude){
+#include <math.h>
+
+
+double calcDistance(double slatitude, double slongitude, double elatitude, double elongitude){
         double slatRads = slatitude*M_PI/180;   //Convert all of the lats and longs to radians
         double slonRads = slongitude*M_PI/180;
         double elatRads = elatitude*M_PI/180;
