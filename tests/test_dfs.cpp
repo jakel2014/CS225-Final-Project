@@ -81,8 +81,6 @@ void load_graph_f_1(WeightedGraph & w) { //basic graph 5
 
 void load_graph_actual_1(WeightedGraph & w){
     DataParser parser("graph_a_airports.csv", "graph_a_routes.csv");
-    parser.airports_helper();
-    parser.routes_helper();
 
     std::vector<std::string> portNames; //Initialize all our variables for airports
     std::vector<ID> portID;

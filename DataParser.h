@@ -4,6 +4,7 @@
 #include "WeightedGraph.h"
 
 class DataParser {
+    
     public:
         DataParser(std::string airports_file, std::string routes_file);
 

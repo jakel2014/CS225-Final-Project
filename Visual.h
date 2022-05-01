@@ -20,5 +20,7 @@ class Visual {
 
     void addTour(std::queue<Airport> path);
 
+    void getVisualOutput(Image & img);
+
 
 };
