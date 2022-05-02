@@ -53,7 +53,7 @@ void DataParser::getRoutesData(std::vector<double> & distances, std::vector<ID> 
 
 void DataParser::getAirportsData(std::vector<std::string> & portNames, std::vector<ID> & portID,
     std::vector<double> & portLatitudes, std::vector<double> & portLongitudes){
-        portNames= this->name;
+        portNames= this->icao;
         portID = this->id;
         portLatitudes = this->lat;
         portLongitudes = this->lon;

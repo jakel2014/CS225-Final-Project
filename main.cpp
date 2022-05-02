@@ -2,12 +2,22 @@
 #include "Airport.h"
 #include "DataParser.h"
 #include "Visual.h"
+#include <iostream>
 
 
 int main() {
-    WeightedGraph new_graph;
+    DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
 
-    DataParser parser("airports-preprocessed.csv", "routes-preprocessed.csv");  //Set up our Data Parser class
+    WeightedGraph new_graph(parser);
+
+
+    //get airport input from from terminal 
+    std::string port1, port2;
+    std::cout << "Please enter a valid XXXX airport code: ";
+    std::cin >> port1;
+
+    std::cout << "Please enter another valid XXXX airport code: ";
+    std::cin >> port2;
 
     std::vector<std::string> portNames; //Initialize all our variables for airports
     std::vector<ID> portID;
@@ -15,19 +25,44 @@ int main() {
     std::vector<double> portLongitudes;
     parser.getAirportsData(portNames, portID, portLatitudes, portLongitudes);
 
-    for(unsigned i = 0; i < portID.size() - 1; i++){    //Add all airports to our graph
-        new_graph.addAirport(portID[i]);
+    bool found1=0, found2=0;
+    ID id1 = 0, id2=0;
+
+    for (size_t i=0; i<portNames.size(); i++) {
+        if (portNames[i] == port1) {
+            found1 = 1;
+            id1 = portID[i];
+        }
+
+        if (portNames[i] == port2) {
+            found2=1;
+            id2 = portID[i];
+        }
+
+        if (found1 & found2)
+            break;
     }
 
-    std::vector<double> distances;  //Initialize all our variables for routes
-    std::vector<ID> sourceID;
-    std::vector<ID> destinationID;
-    parser.getRoutesData(distances, sourceID, destinationID);
+    if (!(found1 & found2))
+        return 0;
 
-    for(unsigned j = 0; j < distances.size() - 1; j++){ //Add all routes to our graph
-        new_graph.addRoute(sourceID[j], destinationID[j], distances[j]);
+    std::stack<Route> path = new_graph.getShortestPath(id1, id2);
+
+    int i=0;
+    std::cout << path.top().getStart(); 
+    while (!path.empty()) {
+        Route curr = path.top();
+        
+        std::cout <<  " -> " << curr.getEnd();
+        i++;
+        if (i==0) {
+            std::cout << std::endl;
+            i=0;
+        }
+        path.pop();
     }
-
+  
+    //
     return 0;
 }
 
@@ -74,11 +109,11 @@ int main() {
 
 
     return 0;
-}
+}*/
 
 
-int main3() { //visual output, only one route
-    DataParser parser("airports-preprocessed.csv", "routes-preprocessed.csv");
+/*int main() { //visual output, only one route
+    DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
 
     Image worldMap;
     worldMap.readFromFile("STRING THAT REPRESENTS PATH TO WORLD MAP");
@@ -105,14 +140,14 @@ int main3() { //visual output, only one route
     for (size_t i=0; i<portNames.size(); i++) {
         if (portNames[i] == port1) {
             found1 = 1;
-            portLatitudes[i] = lat1;
-            portLongitudes[i] = long1;
+            lat1 = portLatitudes[i];
+            long1 = portLongitudes[i];
         }
 
         if (portNames[i] == port2) {
             found2=1;
-            portLatitudes[i] = lat2;
-            portLongitudes[i] = long2;
+            lat2 = portLatitudes[i];
+            long2 = portLongitudes[i];
         }
 
         if (found1 & found2)
