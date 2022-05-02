@@ -19,3 +19,17 @@ double calcDistance(double slatitude, double slongitude, double elatitude, doubl
         
         return ret;
     }
+
+double linearDistance(double x1, double y1, double x2, double y2){  //Distance formula for finding the correct point to plot on map
+    double ret = sqrt(pow((x2-x1),2)+pow((y2-y1),2));
+    return ret;
+}
+
+std::vector<std::pair<double, double>> convertToCoords(double lat, double lon){ //Convert latitude and longitude to x and y coordinates. Returns a vector with both possible points.
+    std::vector<std::pair<double, double>> ret;
+    std::pair<double, double> point1{floor((lat/90)*1022.5 + 1022.5), floor((lon/180)*510 + 510)};  //Normalize each point and then add offset
+    std::pair<double, double> point2{floor((lat/90)*1022.5 + 3067.5), floor((lon/180)*510 + 510)};
+    ret.push_back(point1);
+    ret.push_back(point2);
+    return ret;
+}
