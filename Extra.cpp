@@ -1,5 +1,7 @@
 #pragma once
 
+#include <math.h>
+
 static double calcDistance(double slatitude, double slongitude, double elatitude, double elongitude){
         double slatRads = slatitude*M_PI/180;   //Convert all of the lats and longs to radians
         double slonRads = slongitude*M_PI/180;
