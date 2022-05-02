@@ -27,8 +27,8 @@ double linearDistance(double x1, double y1, double x2, double y2){  //Distance f
 
 std::vector<std::pair<double, double>> convertToCoords(double lat, double lon){ //Convert latitude and longitude to x and y coordinates. Returns a vector with both possible points.
     std::vector<std::pair<double, double>> ret;
-    std::pair<double, double> point1{floor((lat/90)*1022.5 + 1022.5), floor((lon/180)*510 + 510)};  //Normalize each point and then add offset
-    std::pair<double, double> point2{floor((lat/90)*1022.5 + 3067.5), floor((lon/180)*510 + 510)};
+    std::pair<double, double> point1{floor((lon/180)*1022.5 + 1022.5), floor(510 - (lat/90)*510)};  //Normalize each point and then add offset
+    std::pair<double, double> point2{floor((lon/180)*1022.5 + 3067.5), floor(510 - (lat/90)*510)};
     ret.push_back(point1);
     ret.push_back(point2);
     return ret;
