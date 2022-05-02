@@ -4,7 +4,7 @@ TEST = test
 
 # Add all object files needed for compiling:
 EXE_OBJ = main.o
-OBJS = WeightedGraph.o DataParser.o StickerSheet.o Image.o Visual.o main.o
+OBJS = main.o WeightedGraph.o DataParser.o Visual.o StickerSheet.o #WeightedGraph.o DataParser.o StickerSheet.o Image.o Visual.o main.o
 
 ## Generated files
 #CLEAN_RM = unsolved.png solved.png testdijkstra testdfs testvisual \

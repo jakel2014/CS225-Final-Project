@@ -1,5 +1,7 @@
 #include "StickerSheet.h"
-#include "WeightedGraph.h"
+#include <queue>
+#include "Route.h"
+
 
 class Visual {
     private:
@@ -10,7 +12,9 @@ class Visual {
     void createLine(int x1, int y1, int x2, int y2); 
 
     //return is [x_left, y_left, x_right, y_right]
-    std::vector<int> getPixelPosition(double latitude, double longitude);
+    std::vector<std::pair<double, double>> convertToCoords(double lat, double lon);
+
+    double linearDistance(double x1, double y1, double x2, double y2);
 
     public:
     Visual(Image world_map); //sets worldMap as base of map
