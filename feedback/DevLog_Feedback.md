@@ -27,3 +27,13 @@ Sufficient
 
 ### Comments:
 Good to hear that you're making solid progress on the project. I would say your group definitely seems to be at a further stage than many other groups, which is great. I think you'll find that if you have implemented Dijkstra's already, implementing DFS should be fairly trivial (as structurally it is extremely similar to Dijkstra's). Keep up the good work, and let me know if you have any questions.
+
+
+## Week of 4/18 - 4/24
+
+
+### Grade
+Sufficient
+
+### Comments:
+As I had mentioned during the check-in meeting, your group is at a good stage in the project so far. Great work!
