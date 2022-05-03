@@ -64,7 +64,7 @@ void Visual::addLine(double lat1, double long1, double lat2, double long2, unsig
         createLine(pair1[0].first, pair1[0].second, pair2[1].first, pair2[1].second);
     }
     else if(distance2 < priodistance){
-        createLine(pair1[1].first, pair2[1].second, pair2[0].first, pair2[0].second);
+        createLine(pair1[1].first, pair1[1].second, pair2[0].first, pair2[0].second);
     }
     else{
         createLine(pair1[prio].first, pair1[prio].second, pair2[prio].first, pair2[prio].second);
