@@ -23,9 +23,26 @@ Visual::Visual(Image world_map) : map(world_map, 1) { //sets worldMap as base of
     worldMap = world_map;
 }
 
-    //creates the shortest line between two lat, long pts. Prefers left side
-void Visual::addLine(double lat1, double long1, double lat2, double long2) {
-
+    //creates the shortest line between two lat, long pts. Prefers left side (Prio = 0)
+void Visual::addLine(double lat1, double long1, double lat2, double long2, unsigned prio = 0) {
+    //First, create the points
+    std::vector<std::pair<double, double> pair1 = convertToCoords(lat1, lon1);
+    std::vector<std::pair<double, double> pair1 = convertToCoords(lat1, lon1);
+    //Then, find the combination that yields the shortest distance (Prioritize the side that its already on from plot. 0 = left, 1 = right)
+    double distance1 = linearDistance(pair1[0]->first, pair1[0]->second, pair2[1]->first, pair2[1]->second);    //Point 1 on left, Point 2 on right
+    double distance2 = linearDistance(pair2[0]->first, pair2[0]->second, pair1[1]->first, pair2[1]->second);    //Point 2 on left, Point 1 on right
+    //The next distance is the same for both types of inputs, but prio determines which is used
+    double priodistance = linearDistance(pair1[prio]->first, pair1[prio]->second, pair2[prio]->first, pair2[prio]->second); //Both points on same side
+    //Create the line of shortest distance
+    if(distance1 < distance2 && distance1 < priodistance){
+        createLine(pair1[0]->first, pair1[0]->second, pair2[1]->first, pair2[1]->second);
+    }
+    else if(distance2 < priodistance){
+        createLine(pair2[0]->first, pair2[0]->second, pair1[1]->first, pair2[1]->second);
+    }
+    else{
+        createLine(pair1[prio]->first, pair1[prio]->second, pair2[prio]->first, pair2[prio]->second);
+    }
 }
 
 void Visual::addTour(std::queue<Airport> path) {
