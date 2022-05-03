@@ -9,26 +9,15 @@ void Visual::createLine(int x1, int y1, int x2, int y2) {
 
     double leftbound = fmin(x1, x2);
     double rightbound = fmax(x1, x2);
+
+    cs225::HSLAPixel red(0, 1, .5); //Desired color of the line to draw
+
     for(double x = leftbound; x < rightbound; x++){
         double y = floor(m*(x - x1) + y1);
-        cs225::HSLAPixel & temp = worldMap.getPixel(x, y);
-        temp.h = 0;
-        temp.s = 1.0;
-        temp.l = 0.5;
-        temp.a = 1.0;
-
-
-        cs225::HSLAPixel & temp1 = worldMap.getPixel(x, y-1);
-        temp1.h = 0;
-        temp1.s = 1.0;
-        temp1.l = 0.5;
-        temp1.a = 1.0;
-
-        cs225::HSLAPixel & temp2 = worldMap.getPixel(x, y+1);
-        temp2.h = 0;
-        temp2.s = 1.0;
-        temp2.l = 0.5;
-        temp2.a = 1.0;
+        for(int index = -1; index <= 1; index++){
+            cs225::HSLAPixel & temp = worldMap.getPixel(x, y + index);
+            temp = red;
+        }
     }
     drawCircle(x1, y1); //Not super sure about the positioning of these here but I guess
     drawCircle(x2, y2); //we will find out when we make an actual tour
@@ -100,14 +89,14 @@ void Visual::drawCircle(double x1, double y1, double r){
     double yminbound = y1 - r;
     double xmaxbound = x1 + r;
     double xminbound = x1 - r;
+    
+    cs225::HSLAPixel green(120, 1, .5); //Desired color of the circle to draw
+
     for(double x = xminbound; x < xmaxbound; x++){
         for(double y = yminbound; y < ymaxbound; y++){
             if(linearDistance(x, y, x1, y1) <= 5){
-                        cs225::HSLAPixel & temp = worldMap.getPixel(x, y);
-                temp.h = 120;
-                temp.s = 1.0;
-                temp.l = 0.5;
-                temp.a = 1.0;
+                cs225::HSLAPixel & temp = worldMap.getPixel(x, y);
+                temp = green;
             }
         }
     }
