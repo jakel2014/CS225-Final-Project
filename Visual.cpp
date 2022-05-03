@@ -12,6 +12,22 @@ void Visual::createLine(int x1, int y1, int x2, int y2) {
         double y = floor(m*(x - x1) + y1);
         cs225::HSLAPixel & temp = worldMap.getPixel(x, y);
         temp.h = 0;
+        temp.s = 1.0;
+        temp.l = 0.5;
+        temp.a = 1.0;
+
+
+        cs225::HSLAPixel & temp1 = worldMap.getPixel(x, y-1);
+        temp1.h = 0;
+        temp1.s = 1.0;
+        temp1.l = 0.5;
+        temp1.a = 1.0;
+
+        cs225::HSLAPixel & temp2 = worldMap.getPixel(x, y+1);
+        temp2.h = 0;
+        temp2.s = 1.0;
+        temp2.l = 0.5;
+        temp2.a = 1.0;
     }
 }
 
@@ -68,7 +84,7 @@ void Visual::addTour(std::queue<Airport> path) {
 }
 
 void Visual::getVisualOutput(Image & img) {
-    
+    img = worldMap;
 }
 
 double Visual::linearDistance(double x1, double y1, double x2, double y2){  //Distance formula for finding the correct point to plot on map
