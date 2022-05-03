@@ -244,9 +244,7 @@ TEST_CASE("DFS Actual Test 1", "[weight=1][part=1]") {
 
     std::queue<ID> dfs_traversal = w.DFS(3830);
 
-    std::cout<<dfs_traversal.size()<<std::endl;
-    std::cout<<portID.size()<<std::endl;
-    std::cout<<portNames.size()<<std::endl;
+    REQUIRE(dfs_traversal.size() == portID.size());
 
     /*
     for(unsigned i = 0; i < dfs_traversal.size(); i++){
