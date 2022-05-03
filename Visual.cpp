@@ -10,7 +10,7 @@ void Visual::createLine(int x1, int y1, int x2, int y2) {
     double rightbound = fmax(x1, x2);
     for(double x = leftbound; x < rightbound; x++){
         double y = floor(m*(x - x1) + y1);
-        cs225::HSLAPixel temp = worldMap.getPixel(x, y);
+        cs225::HSLAPixel & temp = worldMap.getPixel(x, y);
         temp.h = 0;
     }
 }
