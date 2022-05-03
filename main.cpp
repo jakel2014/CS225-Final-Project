@@ -124,7 +124,6 @@ int main() { //visual output, only one route
     worldMap.readFromFile("images/world-map.png");
     Visual visual(worldMap);
 
-
     //get airport input from from terminal 
     std::string port1, port2;
     std::cout << "Please enter a valid ICAO airport code: ";

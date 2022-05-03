@@ -5,7 +5,8 @@
 
 void Visual::createLine(int x1, int y1, int x2, int y2) {
     //Find and draw equation of line using point slope formula
-    double m = (y2-y1)/(x2-x1); //Slope of the line
+    double m = ((double) y2 - (double) y1)/((double) x2 - (double) x1); //Slope of the line
+    std::cout << m << std::endl;
     double leftbound = fmin(x1, x2);
     double rightbound = fmax(x1, x2);
     for(double x = leftbound; x < rightbound; x++){
