@@ -5,7 +5,7 @@
 #include <iostream>
 
 
-int main() {
+/*int main() {
     DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
 
     WeightedGraph new_graph(parser);
@@ -24,11 +24,6 @@ int main() {
     std::vector<double> portLatitudes;
     std::vector<double> portLongitudes;
     parser.getAirportsData(portNames, portID, portLatitudes, portLongitudes);
-
-    /*for (int i=0; i<4; i++) {
-        std::cout << portNames[i] << ", ";
-    }
-    std::cout << std::endl;*/
 
     bool found1=0, found2=0;
     ID id1=0, id2=0; //URSS, UWKD
@@ -74,7 +69,7 @@ int main() {
   
     //
     return 0;
-}
+}*/
 
 
 /*int main2() { //djikstras with visual output
@@ -122,20 +117,19 @@ int main() {
 }*/
 
 
-/*int main() { //visual output, only one route
+int main() { //visual output, only one route
     DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
 
     Image worldMap;
-    worldMap.readFromFile("STRING THAT REPRESENTS PATH TO WORLD MAP");
+    worldMap.readFromFile("images/world-map.png");
     Visual visual(worldMap);
-
 
     //get airport input from from terminal 
     std::string port1, port2;
-    std::cout << "Please enter a valid XXXX airport code: ";
+    std::cout << "Please enter a valid ICAO airport code: ";
     std::cin >> port1;
 
-    std::cout << "Please enter another valid XXXX airport code: ";
+    std::cout << "Please enter another valid ICAO airport code: ";
     std::cin >> port2;
 
     std::vector<std::string> portNames; //Initialize all our variables for airports
@@ -144,7 +138,7 @@ int main() {
     std::vector<double> portLongitudes;
     parser.getAirportsData(portNames, portID, portLatitudes, portLongitudes);
 
-    bool found1=0, found2=0;
+    bool found1=0, found2=0; //URSS, UWKD
     double lat1=0, long1=0, lat2=0, long2=0;
 
     for (size_t i=0; i<portNames.size(); i++) {
@@ -164,13 +158,16 @@ int main() {
             break;
     }
 
+    if (!(found1 & found2))
+        return 0;
+
     visual.addLine(lat1, long1, lat2, long2);
 
     Image img;
     visual.getVisualOutput(img);
 
-    img.writeToFile("STRING THAT REPRESENTS PATH TO OUTOUT MAP");
+    img.writeToFile("images/path_map.png");
 
     //
     return 0;
-}*/
+}
