@@ -6,7 +6,7 @@
 void Visual::createLine(int x1, int y1, int x2, int y2) {
     //Find and draw equation of line using point slope formula
     double m = ((double) y2 - (double) y1)/((double) x2 - (double) x1); //Slope of the line
-    std::cout << m << std::endl;
+
     double leftbound = fmin(x1, x2);
     double rightbound = fmax(x1, x2);
     for(double x = leftbound; x < rightbound; x++){
@@ -43,9 +43,8 @@ std::vector<std::pair<double, double>> Visual::convertToCoords(double lat, doubl
 }
 
 
-Visual::Visual(Image world_map) : map(world_map, 1) { //sets worldMap as base of map
+Visual::Visual(Image world_map){ //sets worldMap as base of map
 
-    //map = StickerSheet(world_map, 1);
     worldMap = world_map;
 }
 

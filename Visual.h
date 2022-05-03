@@ -5,7 +5,6 @@
 
 class Visual {
     private:
-    StickerSheet map;
     Image worldMap;
 
     //adds and generates Image of line to stickersheet 
