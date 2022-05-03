@@ -80,29 +80,6 @@ void load_graph_f_1(WeightedGraph & w) { //basic graph 5
     w.addRoute(3,3,2);
 }
 
-void load_graph_actual_1(WeightedGraph & w){
-    DataParser parser("graph_a_airports.csv", "graph_a_routes.csv");
-
-    std::vector<std::string> portNames; //Initialize all our variables for airports
-    std::vector<ID> portID;
-    std::vector<double> portLatitudes;
-    std::vector<double> portLongitudes;
-    parser.getAirportsData(portNames, portID, portLatitudes, portLongitudes);
-
-    for(unsigned i = 0; i < portID.size() - 1; i++){    //Add all airports to our graph
-        w.addAirport(portID[i]);
-    }
-
-    std::vector<double> distances;  //Initialize all our variables for routes
-    std::vector<ID> sourceID;
-    std::vector<ID> destinationID;
-    parser.getRoutesData(distances, sourceID, destinationID);
-
-    for(unsigned j = 0; j < distances.size() - 1; j++){ //Add all routes to our graph
-        w.addRoute(sourceID[j], destinationID[j], distances[j]);
-    }
-}
-
 TEST_CASE("DFS Basic Test 1", "[weight=1][part=1]") {
     WeightedGraph w;
     load_graph_a_1(w);
@@ -256,12 +233,33 @@ TEST_CASE("DFS Basic Test 5", "[weight=1][part=1]") {
 }
 
 TEST_CASE("DFS Actual Test 1", "[weight=1][part=1]") {
-    WeightedGraph w;
-    load_graph_actual_1(w);
+    DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
+    WeightedGraph w(parser);
     
-    std::queue<ID> dfs_traversal = w.DFS(1);
+    std::vector<std::string> portNames; //Initialize all our variables for airports
+    std::vector<ID> portID;
+    std::vector<double> portLatitudes;
+    std::vector<double> portLongitudes;
+    parser.getAirportsData(portNames, portID, portLatitudes, portLongitudes);
 
-    REQUIRE(dfs_traversal.size() == 5);
+    std::queue<ID> dfs_traversal = w.DFS(3830);
+
+    std::cout<<dfs_traversal.size()<<std::endl;
+    std::cout<<portID.size()<<std::endl;
+    std::cout<<portNames.size()<<std::endl;
+
+    /*
+    for(unsigned i = 0; i < dfs_traversal.size(); i++){
+        std::cout<<dfs_traversal.front();
+        if(i != dfs_traversal.size() - 2){
+            std::cout<<"-->";
+        }
+        dfs_traversal.pop();
+    }*/
+
+    
+
+    
 
     
 }
