@@ -1,9 +1,19 @@
 #include "Visual.h"
+#include <algorithm>
 
 
 
 void Visual::createLine(int x1, int y1, int x2, int y2) {
-
+    //Find and draw equation of line using point slope formula
+    double m = (y2-y1)/(x2-x1); //Slope of the line
+    double leftbound = min(x1, x2);
+    double rightbound = max(x1, x2);
+    HSLAPixel & temp;
+    for(double x = leftbound; leftbound < rightbound; x++){
+        y = m*(x - x1) + y1;
+        temp = worldMap.getPixel(x, y);
+        temp.h = 0;
+    }
 }
 
     //return is [{x_left, y_left}, {x_right, y_right}]
@@ -23,7 +33,7 @@ Visual::Visual(Image world_map) : map(world_map, 1) { //sets worldMap as base of
     worldMap = world_map;
 }
 
-    //creates the shortest line between two lat, long pts. Prefers left side (Prio = 0)
+    //creates the shortest line between two lat, long pts. Prefers left side (Prio = 0). lat1 and long1 = current lat/long, lat2 and long2 = target lat/long
 void Visual::addLine(double lat1, double long1, double lat2, double long2, unsigned prio = 0) {
     //First, create the points
     std::vector<std::pair<double, double> pair1 = convertToCoords(lat1, lon1);
@@ -38,7 +48,7 @@ void Visual::addLine(double lat1, double long1, double lat2, double long2, unsig
         createLine(pair1[0]->first, pair1[0]->second, pair2[1]->first, pair2[1]->second);
     }
     else if(distance2 < priodistance){
-        createLine(pair2[0]->first, pair2[0]->second, pair1[1]->first, pair2[1]->second);
+        createLine(pair1[1]->first, pair2[1]->second, pair2[0]->first, pair2[0]->second);
     }
     else{
         createLine(pair1[prio]->first, pair1[prio]->second, pair2[prio]->first, pair2[prio]->second);
@@ -46,7 +56,15 @@ void Visual::addLine(double lat1, double long1, double lat2, double long2, unsig
 }
 
 void Visual::addTour(std::queue<Airport> path) {
-
+    Airport cur = path.pop();
+    //Add sticker for start point here?
+    Airport target;
+    while(!path.empty()){
+        target = path.pop();
+        createLine(cur.lat, cur.lon, target.lat, target.lon);
+        cur = target;
+    }
+    //Add sticker for end point here?
 }
 
 void Visual::getVisualOutput(Image & img) {
