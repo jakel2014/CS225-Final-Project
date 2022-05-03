@@ -6,12 +6,11 @@
 void Visual::createLine(int x1, int y1, int x2, int y2) {
     //Find and draw equation of line using point slope formula
     double m = (y2-y1)/(x2-x1); //Slope of the line
-    double leftbound = min(x1, x2);
-    double rightbound = max(x1, x2);
-    HSLAPixel & temp;
-    for(double x = leftbound; leftbound < rightbound; x++){
-        y = m*(x - x1) + y1;
-        temp = worldMap.getPixel(x, y);
+    double leftbound = fmin(x1, x2);
+    double rightbound = fmax(x1, x2);
+    for(double x = leftbound; x < rightbound; x++){
+        double y = floor(m*(x - x1) + y1);
+        cs225::HSLAPixel temp = worldMap.getPixel(x, y);
         temp.h = 0;
     }
 }
@@ -34,34 +33,35 @@ Visual::Visual(Image world_map) : map(world_map, 1) { //sets worldMap as base of
 }
 
     //creates the shortest line between two lat, long pts. Prefers left side (Prio = 0). lat1 and long1 = current lat/long, lat2 and long2 = target lat/long
-void Visual::addLine(double lat1, double long1, double lat2, double long2, unsigned prio = 0) {
+void Visual::addLine(double lat1, double long1, double lat2, double long2, unsigned prio) {
     //First, create the points
-    std::vector<std::pair<double, double> pair1 = convertToCoords(lat1, lon1);
-    std::vector<std::pair<double, double> pair1 = convertToCoords(lat1, lon1);
+    std::vector<std::pair<double, double>> pair1 = convertToCoords(lat1, long1);
+    std::vector<std::pair<double, double>> pair2 = convertToCoords(lat2, long2);
     //Then, find the combination that yields the shortest distance (Prioritize the side that its already on from plot. 0 = left, 1 = right)
-    double distance1 = linearDistance(pair1[0]->first, pair1[0]->second, pair2[1]->first, pair2[1]->second);    //Point 1 on left, Point 2 on right
-    double distance2 = linearDistance(pair2[0]->first, pair2[0]->second, pair1[1]->first, pair2[1]->second);    //Point 2 on left, Point 1 on right
+    double distance1 = linearDistance(pair1[0].first, pair1[0].second, pair2[1].first, pair2[1].second);    //Point 1 on left, Point 2 on right
+    double distance2 = linearDistance(pair2[0].first, pair2[0].second, pair1[1].first, pair2[1].second);    //Point 2 on left, Point 1 on right
     //The next distance is the same for both types of inputs, but prio determines which is used
-    double priodistance = linearDistance(pair1[prio]->first, pair1[prio]->second, pair2[prio]->first, pair2[prio]->second); //Both points on same side
+    double priodistance = linearDistance(pair1[prio].first, pair1[prio].second, pair2[prio].first, pair2[prio].second); //Both points on same side
     //Create the line of shortest distance
     if(distance1 < distance2 && distance1 < priodistance){
-        createLine(pair1[0]->first, pair1[0]->second, pair2[1]->first, pair2[1]->second);
+        createLine(pair1[0].first, pair1[0].second, pair2[1].first, pair2[1].second);
     }
     else if(distance2 < priodistance){
-        createLine(pair1[1]->first, pair2[1]->second, pair2[0]->first, pair2[0]->second);
+        createLine(pair1[1].first, pair2[1].second, pair2[0].first, pair2[0].second);
     }
     else{
-        createLine(pair1[prio]->first, pair1[prio]->second, pair2[prio]->first, pair2[prio]->second);
+        createLine(pair1[prio].first, pair1[prio].second, pair2[prio].first, pair2[prio].second);
     }
 }
 
 void Visual::addTour(std::queue<Airport> path) {
-    Airport cur = path.pop();
+    Airport cur = path.front();
+    path.pop();
     //Add sticker for start point here?
-    Airport target;
     while(!path.empty()){
-        target = path.pop();
-        addLine(cur.lat, cur.lon, target.lat, target.lon);
+        Airport target = path.front();
+        path.pop();
+        addLine(cur.getLat(), cur.getLong(), target.getLat(), target.getLong());
         cur = target;
     }
     //Add sticker for end point here?
