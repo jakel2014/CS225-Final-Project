@@ -61,7 +61,7 @@ void Visual::addTour(std::queue<Airport> path) {
     Airport target;
     while(!path.empty()){
         target = path.pop();
-        createLine(cur.lat, cur.lon, target.lat, target.lon);
+        addLine(cur.lat, cur.lon, target.lat, target.lon);
         cur = target;
     }
     //Add sticker for end point here?
