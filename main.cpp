@@ -13,10 +13,10 @@ int main() {
 
     //get airport input from from terminal 
     std::string port1, port2;
-    std::cout << "Please enter a valid XXXX airport code: ";
+    std::cout << "Please enter a valid ICAO airport code for your departure: ";
     std::cin >> port1;
 
-    std::cout << "Please enter another valid XXXX airport code: ";
+    std::cout << "Please enter another valid ICAO airport code for your arrival: ";
     std::cin >> port2;
 
     std::vector<std::string> portNames; //Initialize all our variables for airports
@@ -25,8 +25,14 @@ int main() {
     std::vector<double> portLongitudes;
     parser.getAirportsData(portNames, portID, portLatitudes, portLongitudes);
 
+    /*for (int i=0; i<4; i++) {
+        std::cout << portNames[i] << ", ";
+    }
+    std::cout << std::endl;*/
+
     bool found1=0, found2=0;
-    ID id1 = 0, id2=0;
+    ID id1=0, id2=0; //URSS, UWKD
+    std::map<ID, std::string> id_to_name;
 
     for (size_t i=0; i<portNames.size(); i++) {
         if (portNames[i] == port1) {
@@ -39,28 +45,32 @@ int main() {
             id2 = portID[i];
         }
 
-        if (found1 & found2)
-            break;
+        id_to_name[portID[i]] = portNames[i];
     }
 
-    if (!(found1 & found2))
+    if (!(found1 & found2)) {
+        std::cout << "Invalid name/s. Try again" << std::endl;
         return 0;
+    }
 
     std::stack<Route> path = new_graph.getShortestPath(id1, id2);
 
     int i=0;
-    std::cout << path.top().getStart(); 
+    std::cout << id_to_name[path.top().getStart()]; 
+    double dist = 0;
     while (!path.empty()) {
         Route curr = path.top();
         
-        std::cout <<  " -> " << curr.getEnd();
+        std::cout <<  " -> " << id_to_name[curr.getEnd()];
         i++;
         if (i==0) {
             std::cout << std::endl;
             i=0;
         }
+        dist = curr.getDist();
         path.pop();
     }
+    std::cout << std::endl << "Total Distance: " << dist << " km" << std::endl;
   
     //
     return 0;

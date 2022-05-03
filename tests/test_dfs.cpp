@@ -1,6 +1,7 @@
 #include "../cs225/catch/catch.hpp"
 #include "../WeightedGraph.h"
 #include "../DataParser.h"
+#include <iostream>
 
 
 void load_graph_a_1(WeightedGraph & w) { //basic graph 1

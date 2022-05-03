@@ -4,6 +4,9 @@ DataParser::DataParser(std::string airports_file, std::string routes_file) {
         airports = rapidcsv::Document(airports_file);  //Load file with rapidcsv
         routes = rapidcsv::Document(routes_file);
 
+        airports_helper();
+        routes_helper();
+
 }
 
 void DataParser::airports_helper(){
@@ -17,7 +20,7 @@ void DataParser::airports_helper(){
     id = airports.GetColumn<ID>("ID");
 
     /*for (int i=0; i<5; i++) {     //Test to see that rapicsv works for airports
-        std::cout << IDs[i] << " " << names[i] << " " << IATAs[i] << ICAOs[i] << std::endl; 
+        std::cout << id[i] << " " << name[i] << " " << iata[i] << icao[i] << std::endl; 
     }*/
 }
 void DataParser::routes_helper(){
