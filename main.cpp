@@ -168,6 +168,27 @@ int main() { //visual output, only one route
 
     img.writeToFile("images/path_map.png");
 
-    //
+     
+    WeightedGraph w(parser);
+
+    std::queue<ID> dfs_traversal = w.DFS(3830);
+
+    std::map<ID, std::string> id_to_name;
+
+    for (size_t i=0; i<portNames.size(); i++) {
+        id_to_name[portID[i]] = portNames[i];
+    }
+
+    for(unsigned i = 0; i < dfs_traversal.size(); i++){
+        std::cout<<id_to_name[dfs_traversal.front()];
+        if(i != dfs_traversal.size() - 1){
+            std::cout<<"-->";
+        }
+        dfs_traversal.pop();
+    }
+
+    std::cout<<std::endl;
+    
     return 0;
+    //
 }
