@@ -43,7 +43,7 @@
         id_to_name[portID[i]] = portNames[i];
     }
 
-    if (!(found1 & found2)) {
+    if (!(found1 && found2)) {
         std::cout << "Invalid name/s. Try again" << std::endl;
         return 0;
     }
@@ -154,11 +154,11 @@ int main() { //visual output, only one route
             long2 = portLongitudes[i];
         }
 
-        if (found1 & found2)
+        if (found1 && found2)
             break;
     }
 
-    if (!(found1 & found2))
+    if (!(found1 && found2))
         return 0;
 
     visual.addLine(lat1, long1, lat2, long2);
