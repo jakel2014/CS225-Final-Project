@@ -72,7 +72,7 @@
 }*/
 
 
-/*int main2() { //djikstras with visual output
+int main2() { //djikstras with visual output
     DataParser parser("airports-preprocessed.csv", "routes-preprocessed.csv");
     WeightedGraph graph(parser);
 
@@ -114,7 +114,7 @@
 
 
     return 0;
-}*/
+}
 
 
 int main() { //visual output, only one route
