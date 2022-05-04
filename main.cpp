@@ -73,7 +73,7 @@
 
 
 int main() { //djikstras with visual output
-    DataParser parser("airports-preprocessed.csv", "routes-preprocessed.csv");
+    DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
     WeightedGraph graph(parser);
 
     Image worldMap;
