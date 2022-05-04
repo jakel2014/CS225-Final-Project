@@ -97,12 +97,16 @@ std::tuple<int, int, int, int> Visual::addLine(double lat1, double long1, double
 }
 
 void Visual::addTour(std::vector<Airport> path) {
+    std::cout << path.size() << std::endl;
     if(path[0].getLong() - path[path.size() - 1].getLong() < -90){  //Ensure that the default priority is 0
         std::reverse(path.begin(), path.end());
     }
+    std::cout << path[0].getName() << std::endl;
     for (size_t i = 0; i < path.size() - 1; ++i) {      //Iterate through airports drawing a line between each!
         Airport &cur    = path[i];
         Airport &target = path[i + 1];
+        std::cout << target.getName() << std::endl;
+
         auto px_vals = addLine(cur.getLat(), cur.getLong(), target.getLat(), target.getLong());
         drawText(std::get<0>(px_vals) + 5, std::get<1>(px_vals) + 5, cur.getName()); // draw name of cur
         if (i == path.size() - 2) // draw name of target, but only for the last line in the path
