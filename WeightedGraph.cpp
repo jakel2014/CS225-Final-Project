@@ -109,7 +109,6 @@ std::stack<Route> WeightedGraph::getShortestPath(ID startID, ID endID) {
     for (auto r = paths.rbegin(); r != paths.rend() && startID != search; ++r) {
         if (r->getEnd() == search) {
             shortestPath.push(*r);
-            std::cout << "iter1" << std::endl;
             search = r->getStart();
         }
     }
