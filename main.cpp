@@ -327,10 +327,130 @@ void runDykstras() {
 }
 
 void runDykstrasWithVisual() {
+    DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
+    WeightedGraph w(parser);
+
+    Image worldMap;
+    worldMap.readFromFile("images/world-map.png");
+    Visual visual(worldMap);
+
+    std::vector<std::string> portNames; //Initialize all our variables for airports
+    std::vector<ID> portID;
+    std::vector<double> portLatitudes;
+    std::vector<double> portLongitudes;
+    parser.getAirportsData(portNames, portID, portLatitudes, portLongitudes);
+
+    std::string port1_name;
+    std::cout << "Please enter a valid ICAO airport code for the Shortest Paths start point: ";
+    std::cin >> port1_name;
+
+    std::string port2_name;
+    std::cout << "Please enter a valid ICAO airport code for the Shortest Paths end point: ";
+    std::cin >> port2_name;
+
+    ID port1 = 0, port2 = 0;
+
+    bool found1 = 0, found2;
+    std::map<ID, Airport> id_to_airport;
+    for (size_t i=0; i<portNames.size(); i++) {
+        id_to_airport[portID[i]] = Airport(portID[i], portLatitudes[i], portLongitudes[i], portNames[i]);
+
+
+        if (!found1 && (portNames[i] == port1_name)) {
+            found1 = 1;
+            port1 = portID[i];
+        }
+
+        if (!found2 && (portNames[i] == port2_name)) {
+            found2 = 1;
+            port2 = portID[i];
+        }
+    }
+
+    if (!(found1 & found2)) {
+        std::cout << "Invalid Input/s. Terminating Program." << std::endl;
+        return;
+    }
+
+    std::stack<Route> path = w.getShortestPath(port1, port2);
+
+    std::vector<Airport> visualPath;
+    visualPath.push_back(id_to_airport[port1]);
+    while (!path.empty()) {
+        Route curr = path.top();
+        visualPath.push_back(id_to_airport[curr.getEnd()]);
+        path.pop();
+    } //initialize vector representing Aiports that represent shorted path
+
+	visual.addTour(visualPath);
+
+    //visual tour algorithm either directly in here or by function
+
+    Image img;
+    visual.getVisualOutput(img);
+
+    img.writeToFile("images/path_map.png");
+
+    std::cout << "Map generated at images/path_map.png" << std::endl;
+
 
 }
 
 void runBasicVisual() {
+    DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
+
+    Image worldMap;
+    worldMap.readFromFile("images/world-map.png");
+    Visual visual(worldMap);
+
+    std::vector<std::string> portNames; //Initialize all our variables for airports
+    std::vector<ID> portID;
+    std::vector<double> portLatitudes;
+    std::vector<double> portLongitudes;
+    parser.getAirportsData(portNames, portID, portLatitudes, portLongitudes);
+
+    std::string port1_name;
+    std::cout << "Please enter a valid ICAO airport code for the Shortest Paths start point: ";
+    std::cin >> port1_name;
+
+    std::string port2_name;
+    std::cout << "Please enter a valid ICAO airport code for the Shortest Paths end point: ";
+    std::cin >> port2_name;
+
+    double lat1=0, long1=0, lat2=0, long2=0;
+
+    ID id1, id2;
+    bool found1=0, found2=0;
+    for (size_t i=0; i<portNames.size(); i++) {
+        if (portNames[i] == port1_name) {
+            found1 = 1;
+            lat1 = portLatitudes[i];
+            long1 = portLongitudes[i];
+        }
+
+        if (portNames[i] == port2_name) {
+            found2=1;
+            lat2 = portLatitudes[i];
+            long2 = portLongitudes[i];
+        }
+
+        if (found1 && found2)
+            break;
+    }
+
+    if (!(found1 && found2)) {
+        std::cout << "Invalid Input/s. Terminating Program." << std::endl;
+        return;
+    }
+
+    visual.addLine(lat1, long1, lat2, long2);
+
+    Image img;
+    visual.getVisualOutput(img);
+
+    img.writeToFile("images/path_map.png");
+
+    std::cout << "Map generated at images/path_map.png" << std::endl;
 
 }
 
@@ -339,7 +459,7 @@ int main() {
     bool init_graph = 0, dfs = 0, get_names = 0, dykstras = 0, dykstras_visual = 0, end = 0; 
 
     std::cout << "Hello CS225 Staff!" << std::endl <<
-        "This the final project using the OpenFlights dataset created by Lucian Bontumasi, Jake Li, Eli Konoponski, and Satvik Yellanki"
+        "This is a project with the OpenFlights dataset created by Lucian Bontumasi, Jake Li, Eli Konoponski, and Satvik Yellanki"
         << std::endl << std::endl;
 
     std::cout << "1: Run a DFS traversal on the OpenFlights dataset." << std:: endl;
