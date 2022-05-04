@@ -1,7 +1,6 @@
-#include "StickerSheet.h"
 #include <queue>
 #include "Route.h"
-
+#include "Image.h"
 
 class Visual {
     private:
