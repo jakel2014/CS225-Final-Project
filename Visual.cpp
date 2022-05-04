@@ -51,11 +51,11 @@ void Visual::addLine(double lat1, double long1, double lat2, double long2) {
     //The next distance is the same for both types of inputs, but prio determines which is used
     double priodistance = linearDistance(pair1[priority].first, pair1[priority].second, pair2[priority].first, pair2[priority].second); //Both points on same side
     //Create the line of shortest distance
-    if(distance1 < distance2 && distance1 < priodistance && priority == 0){
+    if(distance1 < distance2 && distance1 < priodistance){
         createLine(pair1[0].first, pair1[0].second, pair2[1].first, pair2[1].second);
         priority = 1;   //Update the priority side
     }
-    else if(distance2 < priodistance && priority == 1){
+    else if(distance2 < priodistance){
         createLine(pair1[1].first, pair1[1].second, pair2[0].first, pair2[0].second);
         priority = 0;
     }
