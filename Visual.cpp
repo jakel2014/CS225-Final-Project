@@ -4,23 +4,41 @@
 
 
 void Visual::createLine(int x1, int y1, int x2, int y2) {
-    //Find and draw equation of line using point slope formula
-    double m = ((double) y2 - (double) y1)/((double) x2 - (double) x1); //Slope of the line
-
-    double leftbound = fmin(x1, x2);
-    double rightbound = fmax(x1, x2);
-
     cs225::HSLAPixel red(0, 1, .5); //Desired color of the line to draw
+    //Find and draw equation of line using point slope formula
+    double m;
+    if((x2 - x1) != 0){
+        m = ((double) y2 - (double) y1)/((double) x2 - (double) x1); //Slope of the line
+    }
+    else{
+        m = 0;
+    }
+    if(abs(m) <= 3 && (x1 - x2) != 0){
+        double leftbound = fmin(x1, x2);
+        double rightbound = fmax(x1, x2);
 
-    for(double x = leftbound; x < rightbound; x++){
-        double y = floor(m*(x - x1) + y1);
-        for(int index = -1; index <= 1; index++){
-            cs225::HSLAPixel & temp = worldMap.getPixel(x, y + index);
-            temp = red;
+        for(double x = leftbound; x < rightbound; x++){
+            double y = floor(m*(x - x1) + y1);
+            for(int index = -1; index <= 1; index++){
+                cs225::HSLAPixel & temp = worldMap.getPixel(x, y + index);
+                temp = red;
+            }
         }
     }
-    drawCircle(x1, y1); //Not super sure about the positioning of these here but I guess
-    drawCircle(x2, y2); //we will find out when we make an actual tour
+    else{
+        double botbound = fmin(y1, y2);
+        double topbound = fmax(y1, y2);
+
+        for(double y = botbound; y < topbound; y++){
+            double x = floor((1/m)*(y-y1) + x1);
+            for(int index = -1; index <=1; index++){
+                cs225::HSLAPixel & temp = worldMap.getPixel(x + index, y);
+                temp = red;
+            }
+        }
+    }
+    drawCircle(x1, y1); //Add on the circles to denote the airports
+    drawCircle(x2, y2);
 }
 
     //return is [{x_left, y_left}, {x_right, y_right}]
