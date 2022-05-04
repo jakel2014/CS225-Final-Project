@@ -1,4 +1,4 @@
-#include "StickerSheet.h"
+#include "Image.h"
 #include <queue>
 #include "Route.h"
 
