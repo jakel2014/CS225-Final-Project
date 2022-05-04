@@ -28,9 +28,11 @@ void Visual::createLine(int x1, int y1, int x2, int y2) {
     else{
         double botbound = fmin(y1, y2);
         double topbound = fmax(y1, y2);
-
+        if(m != 0){
+            m = 1/m;
+        }
         for(double y = botbound; y < topbound; y++){
-            double x = floor((1/m)*(y-y1) + x1);
+            double x = floor(m*(y-y1) + x1);
             for(int index = -1; index <=1; index++){
                 cs225::HSLAPixel & temp = worldMap.getPixel(x + index, y);
                 temp = red;
