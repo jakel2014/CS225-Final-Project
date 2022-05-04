@@ -105,7 +105,8 @@ int main() { //djikstras with visual output
     std::cin >> endName;
 
     ID beginID = name_to_id[beginName];
-    std::stack<Route> path = graph.getShortestPath(beginID, name_to_id[endName]);
+    ID endID = name_to_id[endName];
+    std::stack<Route> path = graph.getShortestPath(beginID, endID);
 
     std::vector<Airport> visualPath;
     visualPath.push_back(airports[beginID]);

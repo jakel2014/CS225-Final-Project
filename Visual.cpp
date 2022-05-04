@@ -65,6 +65,9 @@ void Visual::addLine(double lat1, double long1, double lat2, double long2) {
 }
 
 void Visual::addTour(std::vector<Airport> path) {
+    if(path[0].getLong() - path[path.size() - 1].getLong() < -90){
+        std::reverse(path.begin(), path.end());
+    }
     for (size_t i = 0; i < path.size() - 1; ++i) {
     	Airport &cur    = path[i];
     	Airport &target = path[i + 1];
