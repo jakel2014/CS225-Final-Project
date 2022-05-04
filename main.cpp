@@ -168,6 +168,6 @@ int main() { //visual output, only one route
 
     img.writeToFile("images/path_map.png");
 
-    //
+    
     return 0;
 }
