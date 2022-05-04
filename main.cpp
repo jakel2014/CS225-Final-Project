@@ -72,12 +72,12 @@
 }*/
 
 
-int main2() { //djikstras with visual output
+int main() { //djikstras with visual output
     DataParser parser("airports-preprocessed.csv", "routes-preprocessed.csv");
     WeightedGraph graph(parser);
 
     Image worldMap;
-    worldMap.readFromFile("STRING THAT REPRESENTS PATH TO WORLD MAP");
+    worldMap.readFromFile("images/world-map.png");
     Visual visual(worldMap);
 
     std::vector<std::string> portNames; //Initialize all our variables for airports
@@ -96,8 +96,15 @@ int main2() { //djikstras with visual output
 
     // TODO request user for airports and output to variables below
     std::string beginName, endName;
-    ID beginID = name_to_id[beginName];
 
+    //get airport input from from terminal 
+    std::cout << "Please enter a valid ICAO airport code: ";
+    std::cin >> beginName;
+
+    std::cout << "Please enter another valid ICAO airport code: ";
+    std::cin >> endName;
+
+    ID beginID = name_to_id[beginName];
     std::stack<Route> path = graph.getShortestPath(beginID, name_to_id[endName]);
 
     std::vector<Airport> visualPath;
@@ -108,16 +115,20 @@ int main2() { //djikstras with visual output
         path.pop();
     } //initialize vector representing Aiports that represent shorted path
 
+	visual.addTour(visualPath);
 
     //visual tour algorithm either directly in here or by function
 
+    Image img;
+    visual.getVisualOutput(img);
 
+    img.writeToFile("images/path_map.png");
 
     return 0;
 }
 
 
-int main() { //visual output, only one route
+/*int main() { //visual output, only one route
     DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
 
     Image worldMap;
@@ -141,15 +152,18 @@ int main() { //visual output, only one route
     bool found1=0, found2=0; //URSS, UWKD
     double lat1=0, long1=0, lat2=0, long2=0;
 
+    ID id1, id2;
     for (size_t i=0; i<portNames.size(); i++) {
         if (portNames[i] == port1) {
             found1 = 1;
+            id1 = i;
             lat1 = portLatitudes[i];
             long1 = portLongitudes[i];
         }
 
         if (portNames[i] == port2) {
             found2=1;
+            id2 = i;
             lat2 = portLatitudes[i];
             long2 = portLongitudes[i];
         }
@@ -161,8 +175,6 @@ int main() { //visual output, only one route
     if (!(found1 && found2))
         return 0;
 
-    visual.addLine(lat1, long1, lat2, long2);
-
     Image img;
     visual.getVisualOutput(img);
 
@@ -170,6 +182,10 @@ int main() { //visual output, only one route
 
      
     WeightedGraph w(parser);
+    std::stack<Route> path = w.getShortestPath(id1, id2);
+    std::queue<Airport> airports = w.routesToAirports(path);
+	std::cout << airports.size() << std::endl;
+	visual.addTour(airports);
 
     std::queue<ID> dfs_traversal = w.DFS(3830);
 
@@ -191,4 +207,4 @@ int main() { //visual output, only one route
     
     return 0;
     //
-}
+}*/

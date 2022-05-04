@@ -24,7 +24,7 @@ class Visual {
     //creates the shortest line between two lat, long pts. Prefers left side
     void addLine(double lat1, double long1, double lat2, double long2);
 
-    void addTour(std::queue<Airport> path);
+    void addTour(std::vector<Airport> path);
 
     void getVisualOutput(Image & img);
 
