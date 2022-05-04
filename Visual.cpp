@@ -11,13 +11,13 @@ void Visual::createLine(int x1, int y1, int x2, int y2) {
         m = ((double) y2 - (double) y1)/((double) x2 - (double) x1); //Slope of the line
     }
     else{
-        m = 0;
+        m = 0;  //Test case when a divide by 0 error could be met
     }
-    if(abs(m) <= 3 && (x1 - x2) != 0){
+    if(abs(m) <= 3 && (x1 - x2) != 0){  //Based on the slop of the line, plots out the lone on worldMap.
         double leftbound = fmin(x1, x2);
         double rightbound = fmax(x1, x2);
 
-        for(double x = leftbound; x < rightbound; x++){
+        for(double x = leftbound; x < rightbound; x++){ //Plot the line within the given bounds
             double y = floor(m*(x - x1) + y1);
             for(int index = -1; index <= 1; index++){
                 cs225::HSLAPixel & temp = worldMap.getPixel(x, y + index);
@@ -25,10 +25,10 @@ void Visual::createLine(int x1, int y1, int x2, int y2) {
             }
         }
     }
-    else{
+    else{   //This is the same thing as above, but for more vertical cases
         double botbound = fmin(y1, y2);
         double topbound = fmax(y1, y2);
-        if(m != 0){
+        if(m != 0){ //Handles another divide by 0 error.
             m = 1/m;
         }
         for(double y = botbound; y < topbound; y++){
@@ -46,9 +46,9 @@ void Visual::createLine(int x1, int y1, int x2, int y2) {
     //return is [{x_left, y_left}, {x_right, y_right}]
 std::vector<std::pair<double, double>> Visual::convertToCoords(double lat, double lon){ //Convert latitude and longitude to x and y coordinates. Returns a vector with both possible points.
     std::vector<std::pair<double, double>> ret;
-    std::pair<double, double> point1{floor((lon/180)*1022.5 + 1022.5), floor(510 - (lat/90)*510)};  //Normalize each point and then add offset
+    std::pair<double, double> point1{floor((lon/180)*1022.5 + 1022.5), floor(510 - (lat/90)*510)};  //Normalize each point and then multiply and add offset
     std::pair<double, double> point2{floor((lon/180)*1022.5 + 3067.5), floor(510 - (lat/90)*510)};
-    ret.push_back(point1);
+    ret.push_back(point1);  //Push the points into the queue indexed by side, 0 = left, 1 = right, similar to priority
     ret.push_back(point2);
     return ret;
 }
@@ -57,7 +57,7 @@ std::vector<std::pair<double, double>> Visual::convertToCoords(double lat, doubl
 Visual::Visual(Image world_map){ //sets worldMap as base of map and initialized priority side
 
     worldMap = world_map;
-    priority = 0;  //0 = left, 1 = right
+    priority = 0;  //0 = left, 1 = right. 0 is always default, input will be corrected to match
 }
 
     //creates the shortest line between two lat, long pts. Prefers left side (Prio = 0). lat1 and long1 = current lat/long, lat2 and long2 = target lat/long
@@ -85,18 +85,18 @@ void Visual::addLine(double lat1, double long1, double lat2, double long2) {
 }
 
 void Visual::addTour(std::vector<Airport> path) {
-    if(path[0].getLong() - path[path.size() - 1].getLong() < -90){
+    if(path[0].getLong() - path[path.size() - 1].getLong() < -90){  //Ensure that the default priority is 0
         std::reverse(path.begin(), path.end());
     }
-    for (size_t i = 0; i < path.size() - 1; ++i) {
+    for (size_t i = 0; i < path.size() - 1; ++i) {      //Iterate through airports drawing a line between each!
     	Airport &cur    = path[i];
     	Airport &target = path[i + 1];
     	addLine(cur.getLat(), cur.getLong(), target.getLat(), target.getLong());
     }
 }
 
-void Visual::getVisualOutput(Image & img) {
-    img = worldMap;
+void Visual::getVisualOutput(Image & img) { //Returns the output image of the map
+    img = worldMap;   
 }
 
 double Visual::linearDistance(double x1, double y1, double x2, double y2){  //Distance formula for finding the correct point to plot on map
@@ -112,7 +112,7 @@ void Visual::drawCircle(double x1, double y1, double r){
     
     cs225::HSLAPixel green(120, 1, .5); //Desired color of the circle to draw
 
-    for(double x = xminbound; x < xmaxbound; x++){
+    for(double x = xminbound; x < xmaxbound; x++){  //Iterate through specified bounds to draw circle
         for(double y = yminbound; y < ymaxbound; y++){
             if(linearDistance(x, y, x1, y1) <= 5){
                 cs225::HSLAPixel & temp = worldMap.getPixel(x, y);
