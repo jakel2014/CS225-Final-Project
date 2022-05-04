@@ -246,14 +246,14 @@ TEST_CASE("DFS Actual Test 1", "[weight=1][part=1]") {
 
     REQUIRE(dfs_traversal.size() == portID.size());
 
-    /*
+    
     for(unsigned i = 0; i < dfs_traversal.size(); i++){
         std::cout<<dfs_traversal.front();
-        if(i != dfs_traversal.size() - 2){
+        if(i != dfs_traversal.size() - 1){
             std::cout<<"-->";
         }
         dfs_traversal.pop();
-    }*/
+    }
 
     
 
