@@ -1,8 +1,6 @@
 #include "Visual.h"
 #include <algorithm>
 
-
-
 void Visual::createLine(int x1, int y1, int x2, int y2) {
     cs225::HSLAPixel red(0, 1, .5); //Desired color of the line to draw
     //Find and draw equation of line using point slope formula
@@ -55,13 +53,13 @@ std::vector<std::pair<double, double>> Visual::convertToCoords(double lat, doubl
 
 
 Visual::Visual(Image world_map){ //sets worldMap as base of map and initialized priority side
-
     worldMap = world_map;
     priority = 0;  //0 = left, 1 = right. 0 is always default, input will be corrected to match
+    dt.LoadFont("fonts/fixed-6x13.bdf");
 }
 
     //creates the shortest line between two lat, long pts. Prefers left side (Prio = 0). lat1 and long1 = current lat/long, lat2 and long2 = target lat/long
-void Visual::addLine(double lat1, double long1, double lat2, double long2) {
+std::tuple<int, int, int, int> Visual::addLine(double lat1, double long1, double lat2, double long2) {
     //First, create the points
     std::vector<std::pair<double, double>> pair1 = convertToCoords(lat1, long1);
     std::vector<std::pair<double, double>> pair2 = convertToCoords(lat2, long2);
@@ -71,17 +69,31 @@ void Visual::addLine(double lat1, double long1, double lat2, double long2) {
     //The next distance is the same for both types of inputs, but prio determines which is used
     double priodistance = linearDistance(pair1[priority].first, pair1[priority].second, pair2[priority].first, pair2[priority].second); //Both points on same side
     //Create the line of shortest distance
+    int x1, y1, x2, y2;
     if(distance1 < distance2 && distance1 < priodistance){
-        createLine(pair1[0].first, pair1[0].second, pair2[1].first, pair2[1].second);
+        x1 = pair1[0].first,
+        y1 = pair1[0].second,
+        x2 = pair2[1].first,
+        y2 = pair2[1].second;
+
         priority = 1;   //Update the priority side
     }
     else if(distance2 < priodistance){
-        createLine(pair1[1].first, pair1[1].second, pair2[0].first, pair2[0].second);
+        x1 = pair1[1].first,
+        y1 = pair1[1].second,
+        x2 = pair2[0].first,
+        y2 = pair2[0].second;
+
         priority = 0;
     }
-    else{
-        createLine(pair1[priority].first, pair1[priority].second, pair2[priority].first, pair2[priority].second);
+    else {
+        x1 = pair1[priority].first,
+        y1 = pair1[priority].second,
+        x2 = pair2[priority].first,
+        y2 = pair2[priority].second;
     }
+    createLine(x1, y1, x2, y2);
+    return std::make_tuple(x1, y1, x2, y2);
 }
 
 void Visual::addTour(std::vector<Airport> path) {
@@ -89,9 +101,12 @@ void Visual::addTour(std::vector<Airport> path) {
         std::reverse(path.begin(), path.end());
     }
     for (size_t i = 0; i < path.size() - 1; ++i) {      //Iterate through airports drawing a line between each!
-    	Airport &cur    = path[i];
-    	Airport &target = path[i + 1];
-    	addLine(cur.getLat(), cur.getLong(), target.getLat(), target.getLong());
+        Airport &cur    = path[i];
+        Airport &target = path[i + 1];
+        auto px_vals = addLine(cur.getLat(), cur.getLong(), target.getLat(), target.getLong());
+        drawText(std::get<0>(px_vals) + 5, std::get<1>(px_vals) + 5, cur.getName()); // draw name of cur
+        if (i == path.size() - 2) // draw name of target, but only for the last line in the path
+            drawText(std::get<2>(px_vals) + 5, std::get<3>(px_vals) + 5, target.getName());
     }
 }
 
@@ -120,4 +135,9 @@ void Visual::drawCircle(double x1, double y1, double r){
             }
         }
     }
+}
+
+void Visual::drawText(unsigned int x, unsigned int y, const std::string text) {
+	cs225::HSLAPixel px_white(0, 0, 1);
+	dt.DrawTextPNG(worldMap, px_white, x, y, text);
 }
