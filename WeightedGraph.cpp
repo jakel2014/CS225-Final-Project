@@ -1,11 +1,7 @@
 #include "WeightedGraph.h"
 
 WeightedGraph::WeightedGraph(DataParser & data) {
-
-    std::vector<ID> portIDs;
-    std::vector<std::string> names;
-    std::vector<double> pt1, pt2;
-    data.getAirportsData(names, portIDs, pt1, pt2);
+    data.getAirportsData(names, portIDs, lats, longs);
     for (auto & id : portIDs) {
         addAirport(id);
     }
@@ -15,7 +11,6 @@ WeightedGraph::WeightedGraph(DataParser & data) {
     data.getRoutesData(distances, sourceID, destinationID);
     for (unsigned i=0; i<distances.size(); i++)
         addRoute(sourceID[i], destinationID[i], distances[i]);
-
 }
 
 WeightedGraph::WeightedGraph(){
@@ -114,6 +109,7 @@ std::stack<Route> WeightedGraph::getShortestPath(ID startID, ID endID) {
     for (auto r = paths.rbegin(); r != paths.rend() && startID != search; ++r) {
         if (r->getEnd() == search) {
             shortestPath.push(*r);
+            std::cout << "iter1" << std::endl;
             search = r->getStart();
         }
     }
@@ -122,6 +118,26 @@ std::stack<Route> WeightedGraph::getShortestPath(ID startID, ID endID) {
 }
 std::stack<Route> WeightedGraph::getShortestPath(Airport start, Airport end) {
     return getShortestPath(start.getID(), end.getID());
+}
+
+std::queue<Airport> WeightedGraph::routesToAirports(std::stack<Route> routes)
+{
+	std::queue<Airport> airports;
+	std::cout << "hello from routesToAirports!" << std::endl;
+	while (!routes.empty()) {
+		std::cout << "iter" << std::endl;
+		Route route = routes.top();
+		routes.pop();
+
+		ID id_start = route.getStart();
+		Airport airport_start(portIDs[id_start], lats[id_start], longs[id_start], names[id_start]);
+		airports.push(airport_start);
+
+		ID id_end = route.getEnd();
+		Airport airport_end(portIDs[id_end], lats[id_end], longs[id_end], names[id_end]);
+		airports.push(airport_end);
+	}
+	return airports;
 }
 
 std::queue<ID> WeightedGraph::getAdjacentAirports(ID id) {

@@ -26,6 +26,10 @@ private:
 
     void clearMarks();
 
+    std::vector<ID> portIDs;
+    std::vector<std::string> names;
+    std::vector<double> lats, longs;
+
 public:
     WeightedGraph(DataParser & data);
     WeightedGraph();
@@ -36,6 +40,8 @@ public:
     void addRoute(ID startID, ID endID, double dist);
     void addRoute(Airport start, Airport end);
     void addRoute(Route route);
+
+	std::queue<Airport> routesToAirports(std::stack<Route> routes);
 
 /*
 This function uses djikstras algorithm to get all the paths from the start

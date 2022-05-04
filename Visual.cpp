@@ -64,14 +64,11 @@ void Visual::addLine(double lat1, double long1, double lat2, double long2) {
     }
 }
 
-void Visual::addTour(std::queue<Airport> path) {
-    Airport cur = path.front();
-    path.pop();
-    while(!path.empty()){
-        Airport target = path.front();
-        path.pop();
-        addLine(cur.getLat(), cur.getLong(), target.getLat(), target.getLong());
-        cur = target;
+void Visual::addTour(std::vector<Airport> path) {
+    for (size_t i = 0; i < path.size() - 1; ++i) {
+    	Airport &cur    = path[i];
+    	Airport &target = path[i + 1];
+    	addLine(cur.getLat(), cur.getLong(), target.getLat(), target.getLong());
     }
 }
 
