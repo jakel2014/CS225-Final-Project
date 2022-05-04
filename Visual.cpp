@@ -142,6 +142,13 @@ void Visual::drawCircle(double x1, double y1, double r){
 }
 
 void Visual::drawText(unsigned int x, unsigned int y, const std::string text) {
-	cs225::HSLAPixel px_white(0, 0, 1);
+	cs225::HSLAPixel px_white(0, 0, 1),
+	                 px_black(0, 0, 0);
+	// drop shadow
+	dt.DrawTextPNG(worldMap, px_black, x - 1, y, text);
+	dt.DrawTextPNG(worldMap, px_black, x + 1, y, text);
+	dt.DrawTextPNG(worldMap, px_black, x, y - 1, text);
+	dt.DrawTextPNG(worldMap, px_black, x, y + 1, text);
+	// primary text
 	dt.DrawTextPNG(worldMap, px_white, x, y, text);
 }
