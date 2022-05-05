@@ -16,7 +16,7 @@ For choosing input and output, both can be selected upon running your desired fu
 We have provided some fun paths to try in [/docs/paths_to_try](/docs/paths_to_try.md).
 
 ## Test suite
-For our test suite, we used Catch v2.13.8, which is in the [/cs225](cs225/) folder. For our Djikstra's and DFS, we made extensive testing in order to make sure our functions were working as expected. To run our tests, all you need to do is run "make test" and then "./test". 
+For our test suite, we used Catch v2.13.8, which is in the [/cs225](/cs225) folder. For our Djikstra's and DFS, we made extensive testing in order to make sure our functions were working as expected. To run our tests, all you need to do is run "make test" and then "./test". 
 
 For both algorithms, we used some basic graphs that we created, as well as a sample datasets from our larger dataset. We then manually computed the expected results, and used Catch to verify whether our expected results were met or not. All of our tests can be viewed in the [/tests](/tests) folder, with tests_dfs.cpp containing our tests for DFS, tests_djikstra.cpp containing our tests for Djikstra's Algorithm, and various images in the folder describing our test graphs. 
 
