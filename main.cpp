@@ -5,8 +5,8 @@
 #include <string>
 #include <iostream>
 
-void runDFS() {
-    DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
+void runDFS(std::string routes_path, std::string ports_path) {
+    DataParser parser(ports_path, routes_path);
     WeightedGraph w(parser);
 
     std::vector<std::string> portNames; //Initialize all our variables for airports
@@ -55,8 +55,8 @@ void runDFS() {
 
 }
 
-void runDykstras() {
-    DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
+void runDykstras(std::string routes_path, std::string ports_path) {
+    DataParser parser(ports_path, routes_path);
     WeightedGraph w(parser);
 
     std::vector<std::string> portNames; //Initialize all our variables for airports
@@ -120,8 +120,8 @@ void runDykstras() {
 
 }
 
-void runDykstrasWithVisual() {
-    DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
+void runDykstrasWithVisual(std::string routes_path, std::string ports_path, std::string image_path) {
+    DataParser parser(ports_path, routes_path);
     WeightedGraph w(parser);
 
     Image worldMap;
@@ -183,15 +183,15 @@ void runDykstrasWithVisual() {
     Image img;
     visual.getVisualOutput(img);
 
-    img.writeToFile("images/path_map.png");
+    img.writeToFile(image_path);
 
-    std::cout << "Map generated at images/path_map.png" << std::endl;
+    std::cout << "Map generated at " << image_path << std::endl;
 
 
 }
 
-void runBasicVisual() {
-    DataParser parser("data/airports-preprocessed.csv", "data/routes-preprocessed.csv");
+void runBasicVisual(std::string routes_path, std::string ports_path, std::string image_path) {
+    DataParser parser(ports_path, routes_path);
 
     Image worldMap;
     worldMap.readFromFile("images/world-map.png");
@@ -242,17 +242,44 @@ void runBasicVisual() {
     Image img;
     visual.getVisualOutput(img);
 
-    img.writeToFile("images/path_map.png");
+    img.writeToFile(image_path);
 
-    std::cout << "Map generated at images/path_map.png" << std::endl;
+    std::cout << "Map generated at " << image_path << std::endl;
 
 }
 
 int main() {
+    std::string routes_path, ports_path, image_path;
+    routes_path = "data/routes-preprocessed.csv";
+    ports_path = "data/airports-preprocessed.csv";
+    image_path = "images/path_map.png";
 
     std::cout << "Hello CS225 Staff." << std::endl <<
-        "This is a project with the OpenFlights dataset created by Lucian Bontumasi, Jake Li, Eli Konopinski, and Satvik Yellanki"
+        "This is the Route Planner created by Lucian Bontumasi, Jake Li, Eli Konopinski, and Satvik Yellanki"
         << std::endl << std::endl;
+
+    std::string yes_no;
+    std::cout << "Would you like to use a custom dataset? [Y/n] ";
+    std::cin >> yes_no;
+    std::transform(yes_no.begin(), yes_no.end(), yes_no.begin(), ::toupper);
+
+
+    if(yes_no[0] == 'Y') {
+        std::cout << "Enter the path to Airports CSV dataset you would like to use: " << std::endl;
+        std::cin >> ports_path;
+        
+        std::cout << "Enter the path to Routes CSV dataset you would like to use: " << std::endl;
+        std::cin >> routes_path;
+    }
+
+    std::ifstream ports_file(ports_path), routes_file(routes_path);
+
+    if(!ports_file.is_open() || !routes_file.is_open()) {
+        std::cout << "Invalid Input. Terminating Program." << std::endl;
+        return 0;
+    }
+
+
 
     std::cout << "1: Run a DFS traversal on the OpenFlights dataset." << std:: endl;
     std::cout << "2: Get Shortest Path between 2 aiports with a text output." << std::endl;
@@ -260,26 +287,53 @@ int main() {
     std::cout << "4: Get an Image with the shortest line between two airports." << std::endl;
 
     std::string option;
+    bool visual = 0;
     std::cout << "Please choose between the above 4 options by typing 1,2,3 or 4 and pressing Enter: ";
     std::cin >> option;
 
     if (option == "1") {
-        runDFS();
+        runDFS(routes_path, ports_path);
         return 0;
     }
     
     if (option == "2") {
-        runDykstras();
+        runDykstras(routes_path, ports_path);
         return 0;
     }
 
+    if(option != "3" && option != "4") {
+        std::cout << "Invalid Input. Terminating Program." << std::endl;
+        return 0;
+    }
+
+    std::string yes_no1;
+    std::cout << "Would you like to output the image a custom path? [Y/n] ";
+    std::cin >> yes_no1;
+    std::transform(yes_no1.begin(), yes_no1.end(), yes_no1.begin(), ::toupper);
+
+
+    if(yes_no1[0] == 'Y') {
+        std::cout << "Enter the path to Image you would like to use: " << std::endl;
+        std::cin >> image_path;
+        
+    }
+
+    std::ifstream image_file(image_path);
+
+    if(!image_file.is_open()) {
+        std::cout << "Invalid Input. Terminating Program." << std::endl;
+        return 0;
+    }
+
+
+
     if (option == "3") {
-        runDykstrasWithVisual();
+        runDykstrasWithVisual(routes_path, ports_path, image_path);
         return 0;
     }
 
     if (option == "4") {
-        runBasicVisual();
+        runBasicVisual(routes_path, ports_path, image_path);
         return 0;
     }
 
