@@ -26,7 +26,7 @@ For our visual output, we think that the output is self explanatory. As our visu
 Lastly, we did use some third-party components to help build our project. All of the third-party components that we used are listed below.
 
 - [rapidcsv: C++ CSV-parsing library](https://github.com/d99kris/rapidcsv) by Kristofer Berggren
-	- License included in [LICENSE (rapidcsv).txt](LICENSE%20(rapidcsv).txt)
+	- License included in [LICENSE (rapidcsv).txt](/LICENSE%20(rapidcsv).txt)
 - [Equirectangular projection SW.jpg](https://commons.wikimedia.org/wiki/File:Equirectangular_projection_SW.jpg) (world map) by [Daniel R. Strebe](https://commons.wikimedia.org/wiki/User:Strebe), 15 Aug 2011
 - Fixed Medium Semicondensed 6x13 (font): public domain
-	- License text inside [font file itself](fonts/fixed-6x13.bdf)
+	- License text inside [font file itself](/fonts/fixed-6x13.bdf)
