@@ -242,8 +242,7 @@ void runDFS() {
         return;
     }
 
-    std::queue<ID> dfs_traversal = w.DFS(3830);
-
+    std::queue<ID> dfs_traversal = w.DFS(port);
     for(unsigned i = 0; i < dfs_traversal.size(); i++){
         std::cout<<id_to_name[dfs_traversal.front()];
         if(i != dfs_traversal.size() - 1){
@@ -253,6 +252,7 @@ void runDFS() {
         if (i%15 == 0) {
             std::cout << std::endl;
         }
+
 
         dfs_traversal.pop();
     }
