@@ -457,7 +457,7 @@ void runBasicVisual() {
 int main() {
 
     std::cout << "Hello CS225 Staff." << std::endl <<
-        "This is a project with the OpenFlights dataset created by Lucian Bontumasi, Jake Li, Eli Konoponski, and Satvik Yellanki"
+        "This is a project with the OpenFlights dataset created by Lucian Bontumasi, Jake Li, Eli Konopinski, and Satvik Yellanki"
         << std::endl << std::endl;
 
     std::cout << "1: Run a DFS traversal on the OpenFlights dataset." << std:: endl;
