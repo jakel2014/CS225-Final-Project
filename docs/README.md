@@ -11,7 +11,7 @@ All of our major code is in the main branch. Both our algorithm for DFS and Djik
 ## How to use our project
 We tried to make our project as easy to use as possible. After running "make", our entire project can be accesed using "./flights". A simple GUI will guide you on how to access whichever part of the project you want. We have 4 options. DFS with text output to console, Djikstra's with text output to console, Djikstra's with visual output, and a simple test output for drawing the shortest line between two airports.
 
-For choosing input and output, both can be selected upon running your desired function, if applicable. You can select input files for all 4 of our functions, and output files for the PNG from our Djikstra's visual output all within our simple GUI. There are also default file locations for both of them, so if you would like to use our input data and standard output file location, you can. (If you would like to manually change the defaults, they are stored on lines 253-255 in [main.cpp](/main.cpp#253).
+For choosing input and output, both can be selected upon running your desired function, if applicable. You can select input files for all 4 of our functions, and output files for the PNG from our Djikstra's visual output all within our simple GUI. There are also default file locations for both of them, so if you would like to use our input data and standard output file location, you can. (If you would like to manually change the defaults, they are stored on lines 253-255 in [main.cpp](/main.cpp#L253).
 
 We have provided some fun paths to try in [/docs/paths_to_try](/docs/paths_to_try.md).
 
