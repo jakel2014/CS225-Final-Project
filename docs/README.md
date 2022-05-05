@@ -13,7 +13,7 @@ We tried to make our project as easy to use as possible. After running "make", o
 
 For choosing input and output, both can be selected upon running your desired function, if applicable. You can select input files for all 4 of our functions, and output files for the PNG from our Djikstra's visual output all within our simple GUI. There are also default file locations for both of them, so if you would like to use our input data and standard output file location, you can.
 
-We have provided some fun paths to try in our [/docs/paths_to_try](/docs/paths_to_try.md) folder.
+We have provided some fun paths to try in [/docs/paths_to_try](/docs/paths_to_try.md).
 
 ## Test suite
 For our test suite, we used Catch v2.13.8, which is in the [/cs225](cs225/) folder. For our Djikstra's and DFS, we made extensive testing in order to make sure our functions were working as expected. To run our tests, all you need to do is run "make test" and then "./test". 
