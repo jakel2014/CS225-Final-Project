@@ -2,7 +2,7 @@ Lucian - Data processing
 
 Jake - DFS  
 
-Satvik - Djikstra's  
+Satvik - Dijkstra's  
 
 Eli - Visual  
 

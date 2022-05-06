@@ -44,7 +44,7 @@ public:
 	std::queue<Airport> routesToAirports(std::stack<Route> routes);
 
 /*
-This function uses djikstras algorithm to get all the paths from the start
+This function uses Dijkstra's algorithm to get all the paths from the start
 airport to the end airport.  
 */
 
